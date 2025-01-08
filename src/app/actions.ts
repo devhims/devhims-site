@@ -44,6 +44,7 @@ type FormData = z.infer<typeof formSchema>;
 type FormResponse = {
   success: boolean;
   data?: FormData;
+  remaining?: number;
   error?: {
     type: 'RATE_LIMIT' | 'VALIDATION' | 'SERVER';
     message: string;
@@ -80,7 +81,7 @@ async function checkRateLimit(
     };
   }
 
-  return { success: true };
+  return { success: true, remaining: result.remaining };
 }
 
 function validateFormData(formData: FormData): FormResponse {
@@ -147,7 +148,7 @@ export async function submitContactForm(
     // 3. Send email
     await sendEmail(validationResult.data!, ip);
 
-    return { success: true };
+    return { success: true, remaining: rateLimitResult.remaining };
   } catch (error) {
     console.error('Error processing form submission:', error);
     return {
