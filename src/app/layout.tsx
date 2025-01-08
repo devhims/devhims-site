@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Himanshu Gupta | Devhims',
   description:
-    'Portfolio of Himanshu Gupta, a software engineer and designer based in the India',
+    'Full-stack web developer and design engineer specializing in React, Next.js, and modern web technologies. Creating performant and beautiful web experiences from India.',
 };
 
 export default function RootLayout({
