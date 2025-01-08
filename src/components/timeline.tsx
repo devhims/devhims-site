@@ -67,7 +67,7 @@ function TimelineItem({
           className='
        w-12 h-12 rounded-full border-2 border-gray-700/50 bg-gray-900
     group-hover:border-blue-500/50 group-hover:bg-blue-500/10
-    transition-colors overflow-hidden grid place-items-center p-2
+    transition-colors overflow-hidden
           '
         >
           {logo ? (
@@ -76,10 +76,14 @@ function TimelineItem({
               alt={company}
               width={32}
               height={32}
-              className='w-full h-full object-contain object-center'
+              className='w-12 h-12 object-cover object-center'
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
             />
           ) : (
-            <div className='w-8 h-8 flex items-center justify-center text-gray-500 font-medium'>
+            <div className='w-full h-full flex items-center justify-center text-gray-500 font-medium'>
               {company.charAt(0)}
             </div>
           )}

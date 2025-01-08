@@ -79,7 +79,8 @@ const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
   {
     date: '2021 - 2024',
     title: 'Senior Software Engineer',
-    company: 'Appearition',
+    company: 'Immersive Realities',
+    logo: '/work-icons/ir.jpeg',
     description: `
 • Designed and implemented a RAG based Chat with Documents AI web application, enabling secure and efficient document storage, retrieval, and Q&A functionality.
 
@@ -91,13 +92,13 @@ const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
 
 • Conducted thorough code reviews and enhanced software architecture to ensure scalable and maintainable solutions.`,
     skills: [
-      'WebAR',
-      'WebXR',
-      '8thWall',
       'React',
       'TypeScript',
       'Next.js',
       'AI',
+      'WebAR',
+      'RAG',
+      '8thWall',
       '3D',
     ],
   },
@@ -105,6 +106,7 @@ const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
     date: '2020 - 2021',
     title: 'Founder and Lead Developer',
     company: 'Cosmoreal',
+    logo: '/work-icons/cosmoreal.jpeg',
     description: `
 • Developed an AR-based mobile app that understands space, offering a true-to-life experience for furniture visualization and interior design.
 
@@ -123,6 +125,7 @@ const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
     date: '2019 - 2021',
     title: 'Co-organizer Unity Bangalore Community',
     company: 'Unity',
+    logo: '/work-icons/unity.jpeg',
     description: `
 • Provided a platform for indie Unity developers and artists to up-skill and get help from others in the field.
 
@@ -140,6 +143,7 @@ const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
     date: '2016 - 2019',
     title: 'Mentor and Project Reviewer',
     company: 'Udacity',
+    logo: '/work-icons/udacity.png',
     description: `
 • Reviewed student projects for the Virtual Reality, Digital Marketing, and Android Basics programs.
 
