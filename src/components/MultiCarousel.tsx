@@ -13,6 +13,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronRightIcon, ChevronLeftIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { createContext } from 'react';
+import { dir } from 'console';
 
 type CarouselContextProps = {
   carouselOptions?: EmblaOptionsType;
@@ -55,7 +56,6 @@ const Carousel = forwardRef<
     {
       carouselOptions,
       orientation = 'horizontal',
-      dir,
       plugins,
       children,
       className,
@@ -67,7 +67,7 @@ const Carousel = forwardRef<
       {
         ...carouselOptions,
         axis: orientation === 'vertical' ? 'y' : 'x',
-        direction: carouselOptions?.direction ?? (dir as DirectionOption),
+        direction: carouselOptions?.direction,
       },
       plugins
     );
@@ -76,7 +76,7 @@ const Carousel = forwardRef<
       {
         ...carouselOptions,
         axis: orientation === 'vertical' ? 'y' : 'x',
-        direction: carouselOptions?.direction ?? (dir as DirectionOption),
+        direction: carouselOptions?.direction,
         containScroll: 'keepSnaps',
         dragFree: true,
       },
@@ -207,7 +207,7 @@ Carousel.displayName = 'Carousel';
 const CarouselMainContainer = forwardRef<
   HTMLDivElement,
   {} & React.HTMLAttributes<HTMLDivElement>
->(({ className, dir, children, ...props }, ref) => {
+>(({ className, ...props }, ref) => {
   const { mainRef, orientation, direction } = useCarousel();
 
   return (
@@ -220,7 +220,7 @@ const CarouselMainContainer = forwardRef<
           className
         )}
       >
-        {children}
+        {props.children}
       </div>
     </div>
   );
@@ -231,7 +231,7 @@ CarouselMainContainer.displayName = 'CarouselMainContainer';
 const CarouselThumbsContainer = forwardRef<
   HTMLDivElement,
   {} & React.HTMLAttributes<HTMLDivElement>
->(({ className, dir, children, ...props }, ref) => {
+>(({ className, ...props }, ref) => {
   const { thumbsRef, orientation, direction } = useCarousel();
 
   return (
@@ -244,7 +244,7 @@ const CarouselThumbsContainer = forwardRef<
           className
         )}
       >
-        {children}
+        {props.children}
       </div>
     </div>
   );
