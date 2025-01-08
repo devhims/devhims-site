@@ -10,25 +10,25 @@ import { type DockProps } from '@/components/Dock';
 
 const socialLinks = [
   {
-    href: 'https://linkedin.com',
+    href: 'https://linkedin.com/in/creativehims/',
     label: 'LinkedIn',
     icon: LinkedinLogo,
     size: 18,
   },
   { href: 'https://github.com', label: 'GitHub', icon: GithubIcon, size: 20 },
   {
-    href: 'https://instagram.com',
+    href: 'https://instagram.com/oh.thathimanshu',
     label: 'Instagram',
     icon: InstagramIcon,
     size: 18,
   },
   {
-    href: 'https://youtube.com',
+    href: 'https://www.youtube.com/@devhims',
     label: 'Youtube',
     icon: YoutubeIcon,
     size: 22,
   },
-  { href: 'https://x.com', label: 'X.com', icon: XLogo, size: 16 },
+  { href: 'https://x.com/devhims', label: 'X.com', icon: XLogo, size: 16 },
 ];
 
 type SocialDockProps = Partial<Omit<DockProps, 'items'>>;
