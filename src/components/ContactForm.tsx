@@ -51,12 +51,12 @@ export default function ContactForm() {
 
       if (response.success) {
         form.reset();
-        toast.success("Thanks for reaching out. I'll get back to you soon.");
-        if (response.remaining) {
-          toast.info(
-            `You have ${response.remaining} messages remaining in this hour.`
-          );
-        }
+        toast.success(`Thanks for reaching out. I'll get back to you soon! 🙂`);
+        // if (response.remaining) {
+        //   toast.info(
+        //     `You have ${response.remaining} messages remaining in this hour.`
+        //   );
+        // }
       } else if (response.error) {
         switch (response.error.type) {
           case 'RATE_LIMIT':
