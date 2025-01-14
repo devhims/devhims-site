@@ -6,6 +6,7 @@ import { headers } from 'next/headers';
 import { Redis } from '@upstash/redis';
 import { Ratelimit } from '@upstash/ratelimit';
 import { createHash } from 'crypto';
+import { saveMessage } from '@/lib/messages';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const redis = new Redis({
@@ -98,7 +99,7 @@ function validateFormData(formData: FormData): FormResponse {
   return { success: true, data: result.data };
 }
 
-async function sendEmail(data: FormData, ip: string) {
+async function sendEmail(data: FormData) {
   const { name, email, message } = data;
 
   return resend.emails.send({
@@ -113,16 +114,7 @@ Sent via devhims.com contact form
 Name: ${name}
 Email: ${email}
 
-System Info:
-• Time: ${new Date().toLocaleString('en-US', {
-      dateStyle: 'full',
-      timeStyle: 'long',
-      timeZone: 'Asia/Kolkata',
-    })}
-• Environment: ${
-      process.env.NODE_ENV === 'development' ? 'Development' : 'Production'
-    }
-• IP: ${ip}`,
+`,
   });
 }
 
@@ -146,7 +138,29 @@ export async function submitContactForm(
     }
 
     // 3. Send email
-    await sendEmail(validationResult.data!, ip);
+    await sendEmail(validationResult.data!);
+
+    // 4. Prepare system info for database
+    const systemInfo = JSON.stringify({
+      timestamp: new Date().toLocaleString('en-US', {
+        dateStyle: 'full',
+        timeStyle: 'long',
+        timeZone: 'Asia/Kolkata',
+      }),
+      environment:
+        process.env.NODE_ENV === 'development' ? 'Development' : 'Production',
+      ip: ip,
+      userAgent: headersList.get('user-agent') || 'unknown',
+    });
+
+    // 5. Fire and forget the database operation
+    saveMessage({
+      email: validationResult.data!.email,
+      message: validationResult.data!.message,
+      systemInfo,
+    }).catch((error) => {
+      console.error('Database operation failed:', error);
+    });
 
     return { success: true, remaining: rateLimitResult.remaining };
   } catch (error) {
