@@ -113,7 +113,6 @@ async function sendEmail(data: FormData) {
 Sent via devhims.com contact form
 Name: ${name}
 Email: ${email}
-
 `,
   });
 }
@@ -137,10 +136,7 @@ export async function submitContactForm(
       return validationResult;
     }
 
-    // 3. Send email
-    await sendEmail(validationResult.data!);
-
-    // 4. Prepare system info for database
+    // 3. Send email and save to database in parallel
     const systemInfo = JSON.stringify({
       timestamp: new Date().toLocaleString('en-US', {
         dateStyle: 'full',
@@ -153,15 +149,39 @@ export async function submitContactForm(
       userAgent: headersList.get('user-agent') || 'unknown',
     });
 
-    // 5. Fire and forget the database operation
-    saveMessage({
-      name: validationResult.data!.name,
-      email: validationResult.data!.email,
-      message: validationResult.data!.message,
-      systemInfo,
-    }).catch((error) => {
-      console.error('Database operation failed:', error);
-    });
+    const [emailResult, dbResult] = await Promise.allSettled([
+      sendEmail(validationResult.data!),
+      saveMessage({
+        name: validationResult.data!.name,
+        email: validationResult.data!.email,
+        message: validationResult.data!.message,
+        systemInfo,
+      }),
+    ]);
+
+    // Check if sending email failed
+    if (emailResult.status === 'rejected') {
+      console.error('Email sending failed:', emailResult.reason);
+      return {
+        success: false,
+        error: {
+          type: 'SERVER',
+          message: 'Failed to send email. Please try again later.',
+        },
+      };
+    }
+
+    // Check if saving message in database failed
+    if (dbResult.status === 'rejected') {
+      console.error('Database operation failed:', dbResult.reason);
+      // return {
+      //   success: false,
+      //   error: {
+      //     type: 'SERVER',
+      //     message: 'Failed to save your message. Please try again later.',
+      //   },
+      // };
+    }
 
     return { success: true, remaining: rateLimitResult.remaining };
   } catch (error) {
