@@ -155,6 +155,7 @@ export async function submitContactForm(
 
     // 5. Fire and forget the database operation
     saveMessage({
+      name: validationResult.data!.name,
       email: validationResult.data!.email,
       message: validationResult.data!.message,
       systemInfo,

@@ -3,10 +3,12 @@ import { messages } from '@/db/schema';
 import { desc } from 'drizzle-orm';
 
 export async function saveMessage({
+  name,
   email,
   message,
   systemInfo,
 }: {
+  name: string;
   email: string;
   message: string;
   systemInfo: string;
@@ -14,6 +16,7 @@ export async function saveMessage({
   const [result] = await db
     .insert(messages)
     .values({
+      name,
       email,
       message,
       systemInfo,
