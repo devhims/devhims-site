@@ -20,17 +20,50 @@ const ratelimit = new Ratelimit({
   limiter: Ratelimit.slidingWindow(3, '1 h'), // 3 requests per hour
   analytics: true,
   prefix: 'ratelimit:contact',
-  ephemeralCache: new Map(),
+  ephemeralCache: false, // remove ephemeral cache to ensure redis always used
 });
+
+function parseUserAgent(userAgent: string): string {
+  // Extract the basic browser and OS information
+  const patterns = {
+    // Match common browsers
+    browser: /(Chrome|Safari|Firefox|Edge|Opera)\/[\d.]+/,
+    // Match common operating systems
+    os: /(Windows NT|Android|iOS|Mac OS X|Linux) ?[\d._]*/,
+    // Match device type (mobile/desktop)
+    mobile: /Mobile|Android|iPhone|iPad/,
+  };
+
+  try {
+    const browser = (userAgent.match(patterns.browser)?.[0] || '').split(
+      '/'
+    )[0];
+    const os = userAgent.match(patterns.os)?.[0] || '';
+    const isMobile = patterns.mobile.test(userAgent);
+
+    // Create a simplified identifier string
+    return `${browser}-${os}-${isMobile ? 'mobile' : 'desktop'}`.toLowerCase();
+  } catch (error) {
+    console.error('Error parsing user agent:', error);
+    return 'unknown';
+  }
+}
 
 // Helper function to create a unique identifier for each client
 function createIdentifier(headersList: Headers, ip: string): string {
   const userAgent = headersList.get('user-agent') || 'unknown';
-  const accept = headersList.get('accept') || '';
-  const acceptLanguage = headersList.get('accept-language') || '';
+  const simplifiedUA = parseUserAgent(userAgent);
 
-  // Create a unique identifier based on multiple factors
-  const identifier = `${ip}:${userAgent}:${accept}:${acceptLanguage}`;
+  // Combine IP with simplified user agent
+  const identifier = `${ip}:${simplifiedUA}`;
+
+  // Log the original and simplified values for debugging
+  console.log('Identifier creation:', {
+    originalUA: userAgent,
+    simplifiedUA,
+    identifier,
+  });
+
   return createHash('md5').update(identifier).digest('hex');
 }
 
@@ -122,7 +155,8 @@ export async function submitContactForm(
 ): Promise<FormResponse> {
   try {
     const headersList = await headers();
-    const ip = headersList.get('x-forwarded-for') || 'unknown';
+    const xForwardedFor = headersList.get('x-forwarded-for') || '';
+    const ip = xForwardedFor.split(',')[0].trim() || 'unknown';
 
     // 1. Check rate limit
     const rateLimitResult = await checkRateLimit(headersList, ip);
@@ -146,7 +180,7 @@ export async function submitContactForm(
       environment:
         process.env.NODE_ENV === 'development' ? 'Development' : 'Production',
       ip: ip,
-      userAgent: headersList.get('user-agent') || 'unknown',
+      userAgent: parseUserAgent(headersList.get('user-agent') || 'unknown'),
     });
 
     const [emailResult, dbResult] = await Promise.allSettled([
