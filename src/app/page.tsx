@@ -14,12 +14,15 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { MailButton } from '@/components/mail-button';
+import { Suspense } from 'react';
 
 export default function ProfilePage() {
   return (
     <div className='min-h-screen bg-black text-white'>
       <div className='container mx-auto flex flex-col md:flex-row justify-center gap-2 px-2'>
-        <MainNav className='hidden md:flex shrink-0 md:sticky md:top-0 md:h-screen' />
+        <Suspense fallback={<div>loading...</div>}>
+          <MainNav className='hidden md:flex shrink-0 md:sticky md:top-0 md:h-screen' />
+        </Suspense>
         <main className='w-full max-w-2xl border-x border-gray-500/50'>
           {/* Banner */}
           <div className='relative h-48 w-full overflow-hidden'>
@@ -64,7 +67,9 @@ export default function ProfilePage() {
 
             <div className='absolute top-5 right-4'>
               <div className='flex items-center gap-2'>
-                <MailButton />
+                <Suspense fallback={<div>...</div>}>
+                  <MailButton />
+                </Suspense>
                 <Button
                   asChild
                   variant='outline'
@@ -126,7 +131,9 @@ export default function ProfilePage() {
           </div>
 
           {/* Tabs */}
-          <ProfileTabs />
+          <Suspense fallback={<div>loading...</div>}>
+            <ProfileTabs />
+          </Suspense>
         </main>
         <RightSidebar className='hidden lg:block shrink-0 lg:sticky lg:top-0 lg:h-screen' />
       </div>
