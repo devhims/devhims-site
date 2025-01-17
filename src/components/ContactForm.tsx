@@ -19,6 +19,7 @@ import SpotlightCard from '@/components/SpotlightCard';
 import { toast } from 'sonner';
 import { submitContactForm } from '@/app/actions';
 import { SocialDock } from './social-dock';
+import { WavingHandIcon } from './icons/WavingHandIcon';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -83,90 +84,98 @@ export default function ContactForm() {
   }
 
   return (
-    <div className='w-full px-2 sm:px-4 md:max-w-2xl mx-auto space-y-4 text-center flex flex-col items-center justify-center'>
-      <div className='space-y-1 mt-5'>
-        <div className='flex items-center justify-center space-x-1'>
-          <div className='motion-rotate-in-45 motion-ease-spring-bounciest origin-center flex items-center justify-center text-3xl'>
-            👋
-          </div>
-          <h2 className='text-2xl font-bold'>Let&rsquo;s Connect</h2>
-        </div>
-        <p className='text-muted-foreground text-sm'>
-          Have something in mind? <br /> I&rsquo;d love to hear from you!
-        </p>
-      </div>
-      <SpotlightCard className='w-[90vw] sm:w-full bg-zinc-950/80 border-zinc-800/50'>
-        <div className='w-full'>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className='space-y-4 text-left'
+    <>
+      <div className='w-full px-2 sm:px-4 md:max-w-2xl mx-auto space-y-4 text-center flex flex-col items-center justify-center'>
+        <div className='space-y-1 mt-5'>
+          <div className='flex items-center justify-center space-x-1'>
+            <div
+              className='origin-center flex items-center justify-center text-3xl'
+              style={{
+                animation: 'waveSpring 1.5s ease-out both',
+                transformOrigin: '70% 70%',
+              }}
             >
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                <FormField
-                  control={form.control}
-                  name='name'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className='text-zinc-200'>Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder='Your name'
-                          className='bg-zinc-900 border-zinc-800'
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name='email'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className='text-zinc-200'>Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder='your.email@gmail.com'
-                          className='bg-zinc-900 border-zinc-800'
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <FormField
-                control={form.control}
-                name='message'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className='text-zinc-200'>Message</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder='What would you like to say?'
-                        className='resize-none bg-zinc-900 border-zinc-800 h-24'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button
-                type='submit'
-                disabled={isSubmitting}
-                className='w-full bg-zinc-100 text-zinc-900 hover:bg-zinc-200 font-semibold'
-              >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </Button>
-            </form>
-          </Form>
+              <WavingHandIcon size={32} />
+            </div>
+            <h2 className='text-2xl font-bold'>Let&rsquo;s Connect</h2>
+          </div>
+          <p className='text-muted-foreground text-sm'>
+            Have something in mind? <br /> I&rsquo;d love to hear from you!
+          </p>
         </div>
-      </SpotlightCard>
-      <SocialDock collapsible={false} position='bottom' responsive='bottom' />
-    </div>
+        <SpotlightCard className='w-[90vw] sm:w-full bg-zinc-950/80 border-zinc-800/50'>
+          <div className='w-full'>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className='space-y-4 text-left'
+              >
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                  <FormField
+                    control={form.control}
+                    name='name'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='text-zinc-200'>Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder='Your name'
+                            className='bg-zinc-900 border-zinc-800'
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name='email'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='text-zinc-200'>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder='your.email@gmail.com'
+                            className='bg-zinc-900 border-zinc-800'
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={form.control}
+                  name='message'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='text-zinc-200'>Message</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder='What would you like to say?'
+                          className='resize-none bg-zinc-900 border-zinc-800 h-24'
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type='submit'
+                  disabled={isSubmitting}
+                  className='w-full bg-zinc-100 text-zinc-900 hover:bg-zinc-200 font-semibold'
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </Button>
+              </form>
+            </Form>
+          </div>
+        </SpotlightCard>
+        <SocialDock collapsible={false} position='bottom' responsive='bottom' />
+      </div>
+    </>
   );
 }

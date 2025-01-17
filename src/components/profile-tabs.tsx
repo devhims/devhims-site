@@ -5,8 +5,11 @@ import { ProjectCard } from '@/components/project-card';
 import { Timeline } from '@/components/timeline';
 import { PostCard } from '@/components/post-card';
 import ContactForm from './ContactForm';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import type { TimelineItemProps } from '@/components/timeline';
+import { useSearchParams } from 'next/navigation';
+import { useSwipeable } from 'react-swipeable';
+import { routes } from '@/constants';
 
 const tabItems = [
   { value: 'posts', label: 'Posts' },
@@ -163,31 +166,66 @@ const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
 ];
 
 export function ProfileTabs() {
-  const [activeTab, setActiveTab] = useState<string>('posts');
+  const searchParams = useSearchParams();
+  const tabFromParams = searchParams.get('tab');
+  const validTabs = routes.map((route) => route.tab);
+  const activeTab =
+    tabFromParams && validTabs.includes(tabFromParams)
+      ? tabFromParams
+      : routes[0].tab;
 
-  useEffect(() => {
-    // Function to handle hash changes
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1);
-      if (hash && tabItems.some((tab) => tab.value === hash)) {
-        setActiveTab(hash);
-      }
-    };
+  // const [activeTab, setActiveTab] = useState<string>('posts');
 
-    // Initial check
-    handleHashChange();
+  // useEffect(() => {
+  //   // Function to handle hash changes
+  //   const handleHashChange = () => {
+  //     const hash = window.location.hash.slice(1);
+  //     if (hash && tabItems.some((tab) => tab.value === hash)) {
+  //       setActiveTab(hash);
+  //     }
+  //   };
 
-    // Listen for hash changes
-    window.addEventListener('hashchange', handleHashChange);
+  //   // Initial check
+  //   handleHashChange();
 
-    // Cleanup
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  //   // Listen for hash changes
+  //   window.addEventListener('hashchange', handleHashChange);
+
+  //   // Cleanup
+  //   return () => window.removeEventListener('hashchange', handleHashChange);
+  // }, []);
+
+  // const handleTabChange = (value: string) => {
+  //   setActiveTab(value);
+  //   window.location.hash = value;
+  // };
 
   const handleTabChange = (value: string) => {
-    setActiveTab(value);
-    window.location.hash = value;
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('tab', value);
+    window.history.pushState(null, '', `?${params.toString()}`);
   };
+
+  // Add swipe handlers
+  const handlers = useSwipeable({
+    onSwipedLeft: (eventData) => {
+      const currentIndex = tabItems.findIndex((tab) => tab.value === activeTab);
+      if (currentIndex < tabItems.length - 1 && eventData.velocity > 0.3) {
+        handleTabChange(tabItems[currentIndex + 1].value);
+      }
+    },
+    onSwipedRight: (eventData) => {
+      const currentIndex = tabItems.findIndex((tab) => tab.value === activeTab);
+      if (currentIndex > 0 && eventData.velocity > 0.3) {
+        handleTabChange(tabItems[currentIndex - 1].value);
+      }
+    },
+    preventScrollOnSwipe: true,
+    trackMouse: false,
+    swipeDuration: 500,
+    delta: 50, // Minimum swipe distance
+    trackTouch: true,
+  });
 
   return (
     <Tabs
@@ -201,39 +239,44 @@ export function ProfileTabs() {
           <TabsTrigger
             key={tab.value}
             value={tab.value}
-            className='group font-semibold text-sm sm:text-sm md:text-base h-[42px] sm:h-[52px] flex items-center justify-center relative rounded-none text-gray-500 hover:bg-gray-800/50 hover:text-white transition-colors data-[state=active]:text-white data-[state=active]:bg-transparent after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[4px] after:rounded-full after:transition-colors after:scale-x-0 after:bg-blue-500/40 data-[state=active]:after:scale-x-50 data-[state=active]:after:bg-blue-500'
+            className='group font-semibold text-sm sm:text-sm md:text-base h-[42px] sm:h-[52px] flex items-center justify-center relative rounded-none text-gray-500 hover:text-white transition-all duration-300 data-[state=active]:text-white data-[state=active]:bg-transparent after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[4px] after:rounded-full after:transition-all after:duration-300 after:scale-x-0 after:bg-blue-500/40 data-[state=active]:after:scale-x-50 data-[state=active]:after:bg-blue-500'
           >
             {tab.label}
           </TabsTrigger>
         ))}
       </TabsList>
-      <TabsContent value='posts' className='mt-4 space-y-4'>
-        {posts.map((post, index) => (
-          <PostCard key={index} {...post} />
-        ))}
-      </TabsContent>
-      <TabsContent value='projects' className='mt-4'>
-        <div className='space-y-4 px-4'>
-          <ProjectCard
-            title='RAG-based Document Chat'
-            description='A knowledge retrieval system enabling secure document storage, chat, and Q&A functionality. Built with Next.js, Vector Databases, OpenAI APIs, and Langchain. Achieved 40% faster data retrieval and 70% reduction in manual processing time.'
-            image='/sample.jpeg'
-            link='#'
-          />
-          <ProjectCard
-            title='3D Editor & AR Viewer'
-            description='A web-based 3D model editor and AR viewer supporting both Android and iOS. Built with Next.js, React Three Fiber, WebXR, and 8th Wall. Features an intuitive interface and cross-platform compatibility.'
-            image='/sample.jpeg'
-            link='https://3d-web-editor.vercel.app/'
-          />
-        </div>
-      </TabsContent>
-      <TabsContent value='experience' className='m-6'>
-        <Timeline items={experienceData} />
-      </TabsContent>
-      <TabsContent value='contact' className='m-6'>
-        <ContactForm />
-      </TabsContent>
+      <div {...handlers} className='transition-all duration-300'>
+        <TabsContent
+          value='posts'
+          className='mt-4 space-y-4 transition-opacity duration-300'
+        >
+          {posts.map((post, index) => (
+            <PostCard key={index} {...post} />
+          ))}
+        </TabsContent>
+        <TabsContent value='projects' className='mt-4'>
+          <div className='space-y-4 px-4'>
+            <ProjectCard
+              title='RAG-based Document Chat'
+              description='A knowledge retrieval system enabling secure document storage, chat, and Q&A functionality. Built with Next.js, Vector Databases, OpenAI APIs, and Langchain. Achieved 40% faster data retrieval and 70% reduction in manual processing time.'
+              image='/sample.jpeg'
+              link='#'
+            />
+            <ProjectCard
+              title='3D Editor & AR Viewer'
+              description='A web-based 3D model editor and AR viewer supporting both Android and iOS. Built with Next.js, React Three Fiber, WebXR, and 8th Wall. Features an intuitive interface and cross-platform compatibility.'
+              image='/sample.jpeg'
+              link='https://3d-web-editor.vercel.app/'
+            />
+          </div>
+        </TabsContent>
+        <TabsContent value='experience' className='m-6'>
+          <Timeline items={experienceData} />
+        </TabsContent>
+        <TabsContent value='contact' className='m-6'>
+          <ContactForm />
+        </TabsContent>
+      </div>
     </Tabs>
   );
 }

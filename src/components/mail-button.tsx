@@ -1,18 +1,24 @@
 'use client';
 
 import { Mail } from 'lucide-react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 export function MailButton() {
-  const router = useRouter();
-  const pathname = usePathname();
-
+  // const router = useRouter();
+  // const pathname = usePathname();
+  const searchParams = useSearchParams();
   const handleClick = () => {
-    if (pathname === '/') {
-      window.location.hash = 'contact';
-    } else {
-      router.push('/#contact');
-    }
+    // if (pathname === '/') {
+    //   window.location.hash = 'contact';
+    // } else {
+    //   router.push('/#contact');
+    // }
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('tab', 'contact');
+    window.history.pushState(null, '', `?${params.toString()}`);
+
+    // router.push(`/?tab=${tab}`);
   };
 
   return (

@@ -2,29 +2,35 @@
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Home, Briefcase, Code2, BookOpen, Mail } from 'lucide-react';
 import { SocialDock } from './social-dock';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { routes } from '@/constants';
 
-const routes = [
-  { href: '/#posts', label: 'Home', icon: Home },
-  { href: '/blog', label: 'Blog', icon: BookOpen },
-  { href: '/#experience', label: 'Experience', icon: Briefcase },
-  { href: '/#projects', label: 'Projects', icon: Code2 },
-  { href: '/#contact', label: 'Contact', icon: Mail },
-];
+const blogUrl = 'https://blog.devhims.com';
 
 export function MainNav({ className }: { className?: string }) {
   const router = useRouter();
-  const pathname = usePathname();
+  // const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const handleNavigation = (href: string) => {
-    if (pathname === '/' && href.startsWith('/#')) {
-      const hash = href.split('#')[1];
-      window.location.hash = hash;
-    } else {
-      router.push(href);
+  const handleNavigation = (tab: string) => {
+    // if (pathname === '/' && href.startsWith('/#')) {
+    //   const hash = href.split('#')[1];
+    //   window.location.hash = hash;
+    // } else {
+    //   router.push(href);
+    // }
+
+    if (tab === 'blog') {
+      window.open(blogUrl, '_blank', 'noopener,noreferrer');
+      return;
     }
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('tab', tab);
+    window.history.pushState(null, '', `?${params.toString()}`);
+
+    router.push(`/?tab=${tab}`);
   };
 
   return (
@@ -33,10 +39,10 @@ export function MainNav({ className }: { className?: string }) {
         const Icon = route.icon;
         return (
           <Button
-            key={route.href}
+            key={route.tab}
             variant='ghost'
             className='w-full xl:justify-start justify-end gap-4 hover:bg-white/15 hover:rounded-3xl hover:text-inherit'
-            onClick={() => handleNavigation(route.href)}
+            onClick={() => handleNavigation(route.tab)}
           >
             <Icon size={26} />
             <span className='hidden xl:inline text-lg font-semibold'>
