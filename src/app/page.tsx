@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { CalendarDays, LinkIcon, MapPin, X } from 'lucide-react';
+import { CalendarDays, LinkIcon, Mail, MapPin, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MainNav } from '@/components/main-nav';
@@ -15,14 +15,19 @@ import {
 } from '@/components/ui/dialog';
 import { MailButton } from '@/components/mail-button';
 import { Suspense } from 'react';
+import { SocialDock } from '@/components/social-dock';
 
 export default function ProfilePage() {
   return (
     <div className='min-h-screen bg-black text-white'>
       <div className='container mx-auto flex flex-col md:flex-row justify-center gap-2 px-2'>
-        <Suspense fallback={<div>loading...</div>}>
-          <MainNav className='hidden md:flex shrink-0 md:sticky md:top-0 md:h-screen' />
-        </Suspense>
+        <div className='hidden md:flex flex-col shrink-0 md:sticky md:top-0 md:h-screen'>
+          <MainNav />
+          <div className='px-4 mt-auto pb-4'>
+            <SocialDock />
+          </div>
+        </div>
+
         <main className='w-full max-w-2xl border-x border-gray-500/50'>
           {/* Banner */}
           <div className='relative h-48 w-full overflow-hidden'>
@@ -67,7 +72,14 @@ export default function ProfilePage() {
 
             <div className='absolute top-5 right-4'>
               <div className='flex items-center gap-2'>
-                <Suspense fallback={<div>...</div>}>
+                <Suspense
+                  fallback={
+                    <Mail
+                      size={36}
+                      className='border border-white rounded-full p-2 w-[36px] h-[36px] cursor-pointer hover:bg-white/10 transition-colors'
+                    />
+                  }
+                >
                   <MailButton />
                 </Suspense>
                 <Button

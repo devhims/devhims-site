@@ -2,25 +2,34 @@
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { SocialDock } from './social-dock';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { routes } from '@/constants';
+import { Suspense } from 'react';
 
 const blogUrl = 'https://blog.devhims.com';
 
-export function MainNav({ className }: { className?: string }) {
+function MainNavSkeleton({ className }: { className?: string }) {
+  return (
+    <nav className={cn('flex flex-col gap-2 p-4', className)}>
+      {/* Create 5 skeleton buttons to match routes length */}
+      {Array.from({ length: 5 }).map((_, i) => (
+        <div
+          key={i}
+          className='w-full h-[44px] flex xl:justify-start justify-end gap-4 px-4 py-2 animate-pulse'
+        >
+          <div className='w-[26px] h-[26px] rounded-md bg-white/15' />
+          <div className='hidden xl:block w-24 h-[26px] rounded-md bg-white/15' />
+        </div>
+      ))}
+    </nav>
+  );
+}
+
+function MainNavClient({ className }: { className?: string }) {
   const router = useRouter();
-  // const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const handleNavigation = (tab: string) => {
-    // if (pathname === '/' && href.startsWith('/#')) {
-    //   const hash = href.split('#')[1];
-    //   window.location.hash = hash;
-    // } else {
-    //   router.push(href);
-    // }
-
     if (tab === 'blog') {
       window.open(blogUrl, '_blank', 'noopener,noreferrer');
       return;
@@ -51,10 +60,14 @@ export function MainNav({ className }: { className?: string }) {
           </Button>
         );
       })}
-
-      <div className='mt-auto pt-4'>
-        <SocialDock />
-      </div>
     </nav>
+  );
+}
+
+export function MainNav({ className }: { className?: string }) {
+  return (
+    <Suspense fallback={<MainNavSkeleton className={className} />}>
+      <MainNavClient className={className} />
+    </Suspense>
   );
 }
