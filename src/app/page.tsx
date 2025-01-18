@@ -1,11 +1,10 @@
 import { Button } from '@/components/ui/button';
-import { CalendarDays, LinkIcon, Mail, MapPin, X } from 'lucide-react';
+import { CalendarDays, LinkIcon, MapPin, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MainNav } from '@/components/main-nav';
 import { RightSidebar } from '@/components/right-sidebar';
 import AuroraEffect from '@/components/AuroraEffect';
-import { ProfileTabs } from '@/components/profile-tabs';
+
 import {
   Dialog,
   DialogContent,
@@ -13,9 +12,12 @@ import {
   DialogClose,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { MailButton } from '@/components/mail-button';
 import { Suspense } from 'react';
 import { SocialDock } from '@/components/social-dock';
+import MainNav from '@/components/main-nav';
+import MailButton from '@/components/mail-button';
+import { ProfileTabsSkeleton } from '@/components/skeletons/profile-tabs-skeleton';
+import ProfileTabs from '@/components/profile-tabs';
 
 export default function ProfilePage() {
   return (
@@ -72,16 +74,8 @@ export default function ProfilePage() {
 
             <div className='absolute top-5 right-4'>
               <div className='flex items-center gap-2'>
-                <Suspense
-                  fallback={
-                    <Mail
-                      size={36}
-                      className='border border-white rounded-full p-2 w-[36px] h-[36px] cursor-pointer hover:bg-white/10 transition-colors'
-                    />
-                  }
-                >
-                  <MailButton />
-                </Suspense>
+                <MailButton />
+
                 <Button
                   asChild
                   variant='outline'
@@ -143,7 +137,8 @@ export default function ProfilePage() {
           </div>
 
           {/* Tabs */}
-          <Suspense fallback={<div>loading...</div>}>
+
+          <Suspense fallback={<ProfileTabsSkeleton />}>
             <ProfileTabs />
           </Suspense>
         </main>

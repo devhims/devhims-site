@@ -31,6 +31,7 @@ export interface TimelineItemProps {
   skills?: string[];
   isLast?: boolean;
   logo?: string;
+  isActiveTab?: boolean;
 }
 
 function TimelineItem({
@@ -41,6 +42,7 @@ function TimelineItem({
   skills,
   isLast,
   logo,
+  isActiveTab,
 }: TimelineItemProps) {
   return (
     <div className='relative flex gap-6 pb-8 group'>
@@ -81,6 +83,7 @@ function TimelineItem({
                 width: '100%',
                 height: '100%',
               }}
+              priority={isActiveTab}
             />
           ) : (
             <div className='w-full h-full flex items-center justify-center text-gray-500 font-medium'>
@@ -123,9 +126,10 @@ function TimelineItem({
 interface TimelineProps {
   className?: string;
   items: Array<Omit<TimelineItemProps, 'isLast'>>;
+  isActiveTab?: boolean;
 }
 
-export function Timeline({ className, items }: TimelineProps) {
+export function Timeline({ className, items, isActiveTab }: TimelineProps) {
   return (
     <div className={cn('space-y-4 mb-16', className)}>
       {items.map((item, index) => (
@@ -134,6 +138,7 @@ export function Timeline({ className, items }: TimelineProps) {
           {...item}
           logo={item.logo || '/globe.svg'}
           isLast={index === items.length - 1}
+          isActiveTab={isActiveTab}
         />
       ))}
     </div>

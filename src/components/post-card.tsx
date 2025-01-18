@@ -29,6 +29,7 @@ interface PostCardProps {
   replies?: number;
   views?: number;
   mediaUrls?: string[];
+  isActiveTab?: boolean;
 }
 
 function formatContentWithHashtags(content: string) {
@@ -49,7 +50,13 @@ function formatContentWithHashtags(content: string) {
   });
 }
 
-function PostMediaCarousel({ mediaUrls }: { mediaUrls: string[] }) {
+function PostMediaCarousel({
+  mediaUrls,
+  isActiveTab = false,
+}: {
+  mediaUrls: string[];
+  isActiveTab?: boolean;
+}) {
   if (!mediaUrls || mediaUrls.length === 0) return null;
 
   const orderedUrls = [...mediaUrls];
@@ -67,6 +74,7 @@ function PostMediaCarousel({ mediaUrls }: { mediaUrls: string[] }) {
                     alt={`Post media ${index + 1}`}
                     fill
                     className='object-cover'
+                    priority={isActiveTab && index === 0}
                   />
                 </div>
               </DialogTrigger>
@@ -175,6 +183,7 @@ export function PostCard({
   replies = 0,
   views = 0,
   mediaUrls,
+  isActiveTab = false,
 }: PostCardProps) {
   return (
     <div className='border-b border-gray-800 px-4 py-3 hover:bg-gray-900/30 transition-colors cursor-pointer'>
@@ -186,6 +195,7 @@ export function PostCard({
             width={48}
             height={48}
             className='rounded-full object-cover w-12 h-12'
+            priority={isActiveTab}
           />
         </div>
         <div className='flex-1 min-w-0'>
@@ -213,7 +223,10 @@ export function PostCard({
 
           {mediaUrls && mediaUrls.length > 0 && (
             <div className='mt-3'>
-              <PostMediaCarousel mediaUrls={mediaUrls} />
+              <PostMediaCarousel
+                mediaUrls={mediaUrls}
+                isActiveTab={isActiveTab}
+              />
             </div>
           )}
 

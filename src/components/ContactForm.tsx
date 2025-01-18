@@ -89,7 +89,6 @@ export default function ContactForm() {
         <div className='space-y-1 mt-5'>
           <div className='flex items-center justify-center space-x-1'>
             <div
-              className='origin-center flex items-center justify-center text-3xl'
               style={{
                 animation: 'waveSpring 1.5s ease-out both',
                 transformOrigin: '70% 70%',
