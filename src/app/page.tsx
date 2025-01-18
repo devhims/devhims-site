@@ -19,13 +19,16 @@ import MailButton from '@/components/mail-button';
 import { ProfileTabsSkeleton } from '@/components/skeletons/profile-tabs-skeleton';
 import ProfileTabs from '@/components/profile-tabs';
 import { MailButtonSkeleton } from '@/components/skeletons/mail-button-skeleton';
+import MainNavSkeleton from '@/components/skeletons/main-nav-skeleton';
 
 export default function ProfilePage() {
   return (
     <div className='min-h-screen bg-black text-white'>
       <div className='container mx-auto flex flex-col md:flex-row justify-center gap-2 px-2'>
         <div className='hidden md:flex flex-col shrink-0 md:sticky md:top-0 md:h-screen'>
-          <MainNav />
+          <Suspense fallback={<MainNavSkeleton />}>
+            <MainNav />
+          </Suspense>
           <div className='px-4 mt-auto pb-4'>
             <SocialDock />
           </div>
