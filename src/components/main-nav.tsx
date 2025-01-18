@@ -19,14 +19,14 @@ export default function MainNav() {
   };
 
   return (
-    <nav className='flex flex-col gap-2 p-4'>
+    <nav className='flex flex-col items-end gap-2 p-4'>
       {routes.map((route) => {
         const Icon = route.icon;
         return (
           <Button
             key={route.tab}
             variant='ghost'
-            className='w-full xl:justify-start justify-end gap-4 hover:bg-white/15 hover:rounded-3xl hover:text-inherit'
+            className='xl:w-full w-fit xl:justify-start justify-end gap-4 hover:bg-white/15 hover:rounded-3xl hover:text-inherit'
             onClick={() => handleClick(route.tab)}
           >
             <Icon size={26} />
