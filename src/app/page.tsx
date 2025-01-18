@@ -18,6 +18,7 @@ import MainNav from '@/components/main-nav';
 import MailButton from '@/components/mail-button';
 import { ProfileTabsSkeleton } from '@/components/skeletons/profile-tabs-skeleton';
 import ProfileTabs from '@/components/profile-tabs';
+import { MailButtonSkeleton } from '@/components/skeletons/mail-button-skeleton';
 
 export default function ProfilePage() {
   return (
@@ -74,7 +75,9 @@ export default function ProfilePage() {
 
             <div className='absolute top-5 right-4'>
               <div className='flex items-center gap-2'>
-                <MailButton />
+                <Suspense fallback={<MailButtonSkeleton />}>
+                  <MailButton />
+                </Suspense>
 
                 <Button
                   asChild
