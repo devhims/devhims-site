@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { CalendarDays, LinkIcon, MapPin, X } from 'lucide-react';
+import { CalendarDays, LinkIcon, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { RightSidebar } from '@/components/right-sidebar';

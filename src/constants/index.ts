@@ -24,7 +24,7 @@ export const tabItems = [
 
 export const posts = [
   {
-    profileImage: '/profile.webp',
+    profileImage: '/profile2.webp',
     name: 'Himanshu Gupta',
     handle: 'devhims',
     isVerified: true,
@@ -37,7 +37,7 @@ export const posts = [
     views: 1.2,
   },
   {
-    profileImage: '/profile.webp',
+    profileImage: '/profile2.webp',
     name: 'Himanshu Gupta',
     handle: 'devhims',
     isVerified: true,

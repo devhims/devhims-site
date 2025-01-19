@@ -59,7 +59,7 @@ export function PostCard({
       <div className='flex gap-3'>
         <div className='flex-shrink-0'>
           <NextImage
-            src='/profile2.webp'
+            src={profileImage}
             alt={name}
             width={48}
             height={48}
