@@ -18,12 +18,24 @@ interface PostCardProps {
   index: number;
 }
 
-function formatContentWithHashtags(content: string) {
-  return content.replace(
-    /#\w+/g,
-    (match) =>
-      `<span class="text-blue-400 font-bold hover:underline cursor-pointer">${match}</span>`
+// Component for clickable hashtag
+function Hashtag({ tag }: { tag: string }) {
+  return (
+    <span className='text-blue-400 font-bold hover:underline cursor-pointer'>
+      {tag}
+    </span>
   );
+}
+
+// Format content into React nodes
+function formatContentWithHashtags(content: string) {
+  const parts = content.split(/(#\w+)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('#')) {
+      return <Hashtag key={index} tag={part} />;
+    }
+    return part;
+  });
 }
 
 export function PostCard({
@@ -76,10 +88,10 @@ export function PostCard({
             </div>
           </div>
 
-          <div
-            className='mt-1 text-[15px] whitespace-pre-wrap break-words text-gray-200'
-            dangerouslySetInnerHTML={{ __html: formattedContent }}
-          />
+          {/* Content section - Now using React nodes directly */}
+          <p className='mt-1 text-[15px] whitespace-pre-wrap break-words text-gray-200'>
+            {formattedContent}
+          </p>
 
           {mediaUrls && mediaUrls.length > 0 && (
             <div className='mt-3'>

@@ -6,8 +6,6 @@ import { Timeline } from '@/components/timeline';
 import { ProjectCard } from '@/components/project-card';
 import ContactForm from './ContactForm';
 import { TabsContainer } from '@/components/tabs-container';
-// import { TabSwitcher } from './tab-switcher-client';
-// import { Suspense } from 'react';
 
 export default function ProfileTabs() {
   const defaultTab = routes[0].tab;
@@ -64,10 +62,4 @@ export default function ProfileTabs() {
       </div>
     </TabsContainer>
   );
-
-  // return (
-  //   <Suspense fallback={<div>Loading...</div>}>
-  //     <TabSwitcher defaultTab={defaultTab}>{tabContent}</TabSwitcher>
-  //   </Suspense>
-  // );
 }
