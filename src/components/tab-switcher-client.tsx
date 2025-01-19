@@ -4,15 +4,16 @@
 import { useSearchParams } from 'next/navigation';
 import { useSwipeable } from 'react-swipeable';
 import { routes, tabItems } from '@/constants';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, cloneElement } from 'react';
+import { TabsProps } from '@radix-ui/react-tabs';
 
-export function TabSwitcher({
-  children,
-  defaultTab,
-}: {
-  children: React.ReactNode;
+// Define the props type for our TabSwitcher
+interface TabSwitcherProps {
+  children: React.ReactElement<TabsProps>;
   defaultTab: string;
-}) {
+}
+
+export function TabSwitcher({ children, defaultTab }: TabSwitcherProps) {
   const searchParams = useSearchParams();
   const [mounted, setMounted] = useState(false);
 
@@ -24,7 +25,6 @@ export function TabSwitcher({
       ? tabFromParams
       : defaultTab;
 
-  // Handle initial mount
   useEffect(() => {
     setMounted(true);
     // Set initial URL if no tab param exists
@@ -34,25 +34,6 @@ export function TabSwitcher({
       window.history.replaceState(null, '', `?${params.toString()}`);
     }
   }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-
-    // Update Radix UI Tabs state via custom event
-    const event = new CustomEvent('tabChange', { detail: activeTab });
-    document.dispatchEvent(event);
-
-    // Force a tab value change
-    const tabsElement = document.querySelector('[role="tablist"]');
-    if (tabsElement) {
-      const tabButton = tabsElement.querySelector(
-        `[value="${activeTab}"]`
-      ) as HTMLButtonElement;
-      if (tabButton) {
-        tabButton.click();
-      }
-    }
-  }, [activeTab, mounted]);
 
   const handleTabChange = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -80,9 +61,15 @@ export function TabSwitcher({
     trackTouch: true,
   });
 
+  // Clone the Tabs component and inject the active tab value and change handler
+  const enhancedChildren = cloneElement(children, {
+    value: activeTab,
+    onValueChange: handleTabChange,
+  } as Partial<TabsProps>);
+
   return (
     <div {...handlers} className='w-full min-h-screen touch-pan-y'>
-      {children}
+      {mounted ? enhancedChildren : children}
     </div>
   );
 }

@@ -31,33 +31,42 @@ export function PostMediaCarouselDialog({
   return (
     <DialogContent className='max-w-[90vw] h-[90vh] !p-0 !gap-0 bg-transparent border-none overflow-hidden'>
       <DialogTitle className='sr-only'>View post media</DialogTitle>
-      <Carousel className='relative h-full'>
+      <Carousel className='relative h-full' aria-label='Media carousel'>
         <CarouselMainContainer className='h-full group'>
           {mediaUrls.map((url, index) => (
             <SliderMainItem
               key={index}
               className='bg-transparent h-full flex items-center justify-center'
             >
-              <div className='relative w-full h-full'>
+              <figure className='relative w-full h-full'>
                 <NextImage
                   src={url}
-                  alt={`Post media ${index + 1}`}
+                  alt={`Post media ${index + 1} of ${mediaUrls.length}`}
                   fill
                   className='object-contain'
                   sizes='90vw'
                 />
-              </div>
+              </figure>
             </SliderMainItem>
           ))}
         </CarouselMainContainer>
         {mediaUrls.length > 1 && (
           <>
-            <CarouselNext className='absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-50 h-8 w-8 sm:h-10 sm:w-10 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/80 transition-colors border-0' />
-            <CarouselPrevious className='absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-50 h-8 w-8 sm:h-10 sm:w-10 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/80 transition-colors border-0' />
+            <CarouselNext
+              className='absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-50 h-8 w-8 sm:h-10 sm:w-10 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/80 transition-colors border-0'
+              aria-label='Next slide'
+            />
+            <CarouselPrevious
+              className='absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-50 h-8 w-8 sm:h-10 sm:w-10 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/80 transition-colors border-0'
+              aria-label='Previous slide'
+            />
           </>
         )}
       </Carousel>
-      <DialogClose className='absolute top-2 right-2 sm:top-4 sm:right-4 rounded-full bg-black/60 p-1.5 sm:p-2 opacity-70 hover:opacity-100 transition-opacity focus:outline-none disabled:pointer-events-none z-50'>
+      <DialogClose
+        className='absolute top-2 right-2 sm:top-4 sm:right-4 rounded-full bg-black/60 p-1.5 sm:p-2 opacity-70 hover:opacity-100 transition-opacity focus:outline-none disabled:pointer-events-none z-50'
+        aria-label='Close dialog'
+      >
         <X className='h-4 w-4 sm:h-5 sm:w-5 text-white' strokeWidth={2.5} />
         <span className='sr-only'>Close</span>
       </DialogClose>

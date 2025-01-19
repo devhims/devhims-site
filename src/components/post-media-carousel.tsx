@@ -15,8 +15,12 @@ export function PostMediaCarousel({
   // For server-side rendering, we'll show a simple grid of images
   if (mediaUrls.length === 1) {
     return (
-      <div className='mt-3'>
-        <div className='relative aspect-[16/9]'>
+      <section className='mt-3' role='region' aria-label='Single post media'>
+        {' '}
+        {/* Changed from div to section */}
+        <figure className='relative aspect-[16/9]'>
+          {' '}
+          {/* Changed from div to figure */}
           <NextImage
             src={mediaUrls[0]}
             alt='Post media'
@@ -24,8 +28,8 @@ export function PostMediaCarousel({
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             className='object-cover rounded-xl'
           />
-        </div>
-      </div>
+        </figure>
+      </section>
     );
   }
 
@@ -38,10 +42,10 @@ export function PostMediaCarousel({
       : 'grid-cols-2';
 
   const serverContent = (
-    <div className='mt-3'>
+    <section className='mt-3' role='region' aria-label='Post media gallery'>
       <div className={`grid ${gridClass} gap-1 aspect-[16/9]`}>
         {mediaUrls.slice(0, 4).map((url, imgIndex) => (
-          <div
+          <figure
             key={imgIndex}
             className={`relative ${
               mediaUrls.length === 3 && imgIndex === 0 ? 'row-span-2' : ''
@@ -49,15 +53,15 @@ export function PostMediaCarousel({
           >
             <NextImage
               src={url}
-              alt={`Post media ${imgIndex + 1}`}
+              alt={`Post media ${imgIndex + 1} of ${mediaUrls.length}`}
               fill
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               className='object-cover rounded-xl'
             />
-          </div>
+          </figure>
         ))}
       </div>
-    </div>
+    </section>
   );
 
   // Wrap with client component for interactivity
