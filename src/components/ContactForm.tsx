@@ -98,7 +98,7 @@ export default function ContactForm() {
             </div>
             <h2 className='text-2xl font-bold'>Let&rsquo;s Connect</h2>
           </div>
-          <p className='text-muted-foreground text-sm'>
+          <p className='text-gray-400 text-sm'>
             Have something in mind? <br /> I&rsquo;d love to hear from you!
           </p>
         </div>

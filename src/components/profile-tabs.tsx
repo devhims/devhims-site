@@ -71,11 +71,7 @@ export default function ProfileTabs() {
           className='mt-4 space-y-4 transition-opacity duration-300'
         >
           {posts.map((post, index) => (
-            <PostCard
-              key={index}
-              {...post}
-              isActiveTab={activeTab === 'posts'}
-            />
+            <PostCard key={index} {...post} index={index} />
           ))}
         </TabsContent>
         <TabsContent value='projects' className='m-6'>

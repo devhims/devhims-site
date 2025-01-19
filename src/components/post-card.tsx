@@ -16,7 +16,6 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { X } from 'lucide-react';
-import { useEffect } from 'react';
 
 interface PostCardProps {
   profileImage: string;
@@ -30,11 +29,10 @@ interface PostCardProps {
   replies?: number;
   views?: number;
   mediaUrls?: string[];
-  isActiveTab?: boolean;
+  index: number;
 }
 
 function formatContentWithHashtags(content: string) {
-  // Split content by hashtags but keep the hashtags
   const parts = content.split(/(#\w+)/g);
   return parts.map((part, index) => {
     if (part.startsWith('#')) {
@@ -61,65 +59,46 @@ function getPostImageProps(imageUrl: string, alt: string) {
   });
 }
 
-function usePrefetchPostImage(imageUrl: string | undefined, name: string) {
-  useEffect(() => {
-    if (!imageUrl) return;
-
-    const prefetchProps = getImageProps({
-      height: 256,
-      quality: 80,
-      width: 256,
-      src: imageUrl,
-      alt: `Post image of ${name}`,
-    });
-
-    try {
-      const iprops = prefetchProps.props;
-      const img = new Image();
-      img.fetchPriority = 'low';
-      img.decoding = 'async';
-      if (iprops.sizes) img.sizes = iprops.sizes;
-      if (iprops.srcSet) img.srcset = iprops.srcSet;
-      if (iprops.src) img.src = iprops.src;
-    } catch (e) {
-      console.error('Failed to preload image:', prefetchProps.props.src, e);
-    }
-  }, [imageUrl, name]);
-}
-
 function PostMediaCarousel({
   mediaUrls,
-  isActiveTab = false,
+  index,
 }: {
   mediaUrls: string[];
-  isActiveTab?: boolean;
+  index: number;
 }) {
   if (!mediaUrls || mediaUrls.length === 0) return null;
 
   const orderedUrls = [...mediaUrls];
+  const shouldLoadEager = index < 2;
 
   return (
     <Dialog>
       <Carousel className='relative'>
         <CarouselMainContainer className='aspect-[16/9] group'>
-          {orderedUrls.map((url, index) => (
-            <SliderMainItem key={index} className='bg-transparent'>
+          {orderedUrls.map((url, imgIndex) => (
+            <SliderMainItem key={imgIndex} className='bg-transparent'>
               <DialogTrigger asChild>
                 <div
                   className='relative size-full overflow-hidden rounded-xl border border-gray-800 cursor-pointer'
                   role='button'
-                  aria-label={`View enlarged post media ${index + 1}`}
+                  aria-label={`View enlarged post media ${imgIndex + 1}`}
                 >
                   <NextImage
                     src={url}
-                    alt={`Post media ${index + 1}`}
+                    alt={`Post media ${imgIndex + 1}`}
                     fill
                     sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                     className='object-cover'
-                    loading={isActiveTab && index === 0 ? 'eager' : 'lazy'}
-                    decoding={isActiveTab && index === 0 ? 'sync' : 'async'}
+                    loading={
+                      shouldLoadEager && imgIndex === 0 ? 'eager' : 'lazy'
+                    }
+                    decoding={
+                      shouldLoadEager && imgIndex === 0 ? 'sync' : 'async'
+                    }
+                    fetchPriority={
+                      shouldLoadEager && imgIndex === 0 ? 'high' : 'low'
+                    }
                     quality={65}
-                    fetchPriority={isActiveTab && index === 0 ? 'high' : 'low'}
                   />
                 </div>
               </DialogTrigger>
@@ -128,19 +107,22 @@ function PostMediaCarousel({
         </CarouselMainContainer>
         {orderedUrls.length > 1 && (
           <CarouselThumbsContainer className='mt-2'>
-            {orderedUrls.map((url, index) => (
+            {orderedUrls.map((url, imgIndex) => (
               <SliderThumbItem
-                key={index}
-                index={index}
+                key={imgIndex}
+                index={imgIndex}
                 className='bg-transparent'
               >
                 <div className='relative aspect-square rounded-md border border-gray-800 overflow-hidden'>
                   <NextImage
                     src={url}
-                    alt={`Thumbnail ${index + 1}`}
+                    alt={`Thumbnail ${imgIndex + 1}`}
                     fill
                     sizes='100px'
                     className='object-cover'
+                    loading='lazy'
+                    decoding='async'
+                    fetchPriority='low'
                   />
                 </div>
               </SliderThumbItem>
@@ -230,12 +212,10 @@ export function PostCard({
   replies = 0,
   views = 0,
   mediaUrls,
-  isActiveTab = false,
+  index,
 }: PostCardProps) {
   const profileImageProps = getPostImageProps(profileImage, name);
-
-  // Prefetch the first media image if available and tab is active
-  usePrefetchPostImage(isActiveTab ? mediaUrls?.[0] : undefined, name);
+  const shouldLoadEager = index < 4;
 
   return (
     <article className='border-b border-gray-800 px-4 py-3 hover:bg-gray-900/30 transition-colors cursor-pointer'>
@@ -243,10 +223,12 @@ export function PostCard({
         <div className='flex-shrink-0'>
           <NextImage
             {...profileImageProps.props}
-            className='rounded-full object-cover w-12 h-12'
             src={profileImage}
-            loading={isActiveTab ? 'eager' : 'lazy'}
-            decoding={isActiveTab ? 'sync' : 'async'}
+            className='rounded-full object-cover w-12 h-12'
+            loading={shouldLoadEager ? 'eager' : 'lazy'}
+            decoding={shouldLoadEager ? 'sync' : 'async'}
+            fetchPriority={shouldLoadEager ? 'high' : 'low'}
+            quality={65}
           />
         </div>
         <div className='flex-1 min-w-0'>
@@ -278,10 +260,7 @@ export function PostCard({
 
           {mediaUrls && mediaUrls.length > 0 && (
             <div className='mt-3'>
-              <PostMediaCarousel
-                mediaUrls={mediaUrls}
-                isActiveTab={isActiveTab}
-              />
+              <PostMediaCarousel mediaUrls={mediaUrls} index={index} />
             </div>
           )}
 
