@@ -81,6 +81,7 @@ function PostMediaCarousel({
                     className='object-cover'
                     priority={isActiveTab && index === 0}
                     loading={isActiveTab && index === 0 ? 'eager' : 'lazy'}
+                    quality={75}
                   />
                 </div>
               </DialogTrigger>
@@ -194,7 +195,7 @@ export function PostCard({
   isActiveTab = false,
 }: PostCardProps) {
   return (
-    <div className='border-b border-gray-800 px-4 py-3 hover:bg-gray-900/30 transition-colors cursor-pointer'>
+    <article className='border-b border-gray-800 px-4 py-3 hover:bg-gray-900/30 transition-colors cursor-pointer'>
       <div className='flex gap-3'>
         <div className='flex-shrink-0'>
           <Image
@@ -214,9 +215,10 @@ export function PostCard({
                 <Image
                   src='/blue-twitter-verified-sign.svg'
                   alt='Verified'
-                  width={16}
-                  height={16}
-                  className='hidden sm:inline-block flex-shrink-0'
+                  width={14}
+                  height={14}
+                  className='inline-block flex-shrink-0'
+                  loading='lazy'
                 />
               )}
             </div>
@@ -314,6 +316,6 @@ export function PostCard({
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
