@@ -7,7 +7,7 @@ export function RightSidebar({ className }: { className?: string }) {
     <div className={cn('w-80 p-4 space-y-4', className)}>
       <SpotlightCard>
         <div className='mb-4'>
-          <h3 className='text-xl font-bold'>Skills Spotlight</h3>
+          <h2 className='text-xl font-bold'>Skills Spotlight</h2>
         </div>
         <div className='flex flex-wrap gap-2'>
           <HoverEffect items={skills} />
@@ -16,7 +16,7 @@ export function RightSidebar({ className }: { className?: string }) {
 
       <SpotlightCard>
         <div className='mb-4'>
-          <h3 className='text-xl font-bold'>Featured Blog Posts</h3>
+          <h2 className='text-xl font-bold'>Featured Blog Posts</h2>
         </div>
         <div className='space-y-4'>
           {blogPosts.map((post) => (

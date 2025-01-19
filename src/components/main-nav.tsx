@@ -28,8 +28,9 @@ export default function MainNav() {
             variant='ghost'
             className='xl:w-full w-fit xl:justify-start justify-end gap-4 hover:bg-white/15 hover:rounded-3xl hover:text-inherit'
             onClick={() => handleClick(route.tab)}
+            aria-label={route.label}
           >
-            <Icon size={26} />
+            <Icon size={26} aria-hidden='true' />
             <span className='hidden xl:inline text-lg font-semibold'>
               {route.label}
             </span>

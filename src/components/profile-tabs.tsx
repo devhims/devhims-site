@@ -78,8 +78,8 @@ export default function ProfileTabs() {
             />
           ))}
         </TabsContent>
-        <TabsContent value='projects' className='mt-4'>
-          <div className='space-y-4 px-4'>
+        <TabsContent value='projects' className='m-6'>
+          <div className='space-y-6'>
             <ProjectCard
               title='RAG-based Document Chat'
               description='A knowledge retrieval system enabling secure document storage, chat, and Q&A functionality. Built with Next.js, Vector Databases, OpenAI APIs, and Langchain. Achieved 40% faster data retrieval and 70% reduction in manual processing time.'

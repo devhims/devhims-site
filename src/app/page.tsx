@@ -104,12 +104,12 @@ export default function ProfilePage() {
                   className='inline-block'
                 />
               </h1>
-              <p className='text-gray-500'>@devhims</p>
+              <p className='text-gray-400'>@devhims</p>
               <p className='text-gray-200'>
                 Full-stack developer passionate about building great user
                 experiences
               </p>
-              <div className='flex flex-wrap gap-y-2 gap-x-4 text-gray-500 text-sm'>
+              <div className='flex flex-wrap gap-y-2 gap-x-4 text-gray-400 text-sm'>
                 <span className='flex items-center gap-1'>
                   <MapPin size={16} />
                   Bengaluru, India

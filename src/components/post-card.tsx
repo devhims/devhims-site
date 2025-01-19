@@ -68,13 +68,19 @@ function PostMediaCarousel({
           {orderedUrls.map((url, index) => (
             <SliderMainItem key={index} className='bg-transparent'>
               <DialogTrigger asChild>
-                <div className='relative size-full overflow-hidden rounded-xl border border-gray-800 cursor-pointer'>
+                <div
+                  className='relative size-full overflow-hidden rounded-xl border border-gray-800 cursor-pointer'
+                  role='button'
+                  aria-label={`View enlarged post media ${index + 1}`}
+                >
                   <Image
                     src={url}
                     alt={`Post media ${index + 1}`}
                     fill
+                    sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                     className='object-cover'
                     priority={isActiveTab && index === 0}
+                    loading={isActiveTab && index === 0 ? 'eager' : 'lazy'}
                   />
                 </div>
               </DialogTrigger>
@@ -94,6 +100,7 @@ function PostMediaCarousel({
                     src={url}
                     alt={`Thumbnail ${index + 1}`}
                     fill
+                    sizes='100px'
                     className='object-cover'
                   />
                 </div>
@@ -118,6 +125,7 @@ function PostMediaCarousel({
                     alt={`Post media ${index + 1}`}
                     fill
                     className='object-contain'
+                    sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                   />
                 </div>
               </SliderMainItem>
@@ -212,9 +220,11 @@ export function PostCard({
                 />
               )}
             </div>
-            <span className='text-gray-500 truncate'>@{handle}</span>
-            <span className='text-gray-500'>·</span>
-            <span className='text-gray-500 text-xs sm:text-base'>{date}</span>
+            <div className='sm:ml-1 flex items-center gap-1 text-gray-400 text-md'>
+              <span className='truncate'>@{handle}</span>
+              <span>·</span>
+              <span>{date}</span>
+            </div>
           </div>
 
           <p className='mt-1 text-[15px] whitespace-pre-wrap break-words text-gray-200'>
@@ -230,8 +240,8 @@ export function PostCard({
             </div>
           )}
 
-          <div className='flex justify-between mt-3 text-gray-500 text-sm max-w-md'>
-            <button className='flex items-center gap-1 hover:text-blue-500 group transition-colors'>
+          <div className='flex justify-between mt-4 text-gray-400 text-sm max-w-md'>
+            <div className='flex items-center gap-1 hover:text-blue-500 group transition-colors'>
               <svg
                 className='w-[18px] h-[18px] group-hover:bg-blue-500/10 rounded-full p-[2px] transition-colors'
                 fill='none'
@@ -246,8 +256,8 @@ export function PostCard({
                 />
               </svg>
               <span>{replies}</span>
-            </button>
-            <button className='flex items-center gap-1 hover:text-green-500 group transition-colors'>
+            </div>
+            <div className='flex items-center gap-1 hover:text-green-500 group transition-colors'>
               <svg
                 className='w-[18px] h-[18px] group-hover:bg-green-500/10 rounded-full p-[2px] transition-colors'
                 fill='none'
@@ -262,8 +272,8 @@ export function PostCard({
                 />
               </svg>
               <span>{retweets}</span>
-            </button>
-            <button className='flex items-center gap-1 hover:text-pink-500 group transition-colors'>
+            </div>
+            <div className='flex items-center gap-1 hover:text-pink-500 group transition-colors'>
               <svg
                 className='w-[18px] h-[18px] group-hover:bg-pink-500/10 rounded-full p-[2px] transition-colors'
                 fill='none'
@@ -278,8 +288,8 @@ export function PostCard({
                 />
               </svg>
               <span>{likes}</span>
-            </button>
-            <button className='flex items-center gap-1 hover:text-blue-500 group transition-colors'>
+            </div>
+            <div className='flex items-center gap-1 hover:text-blue-500 group transition-colors'>
               <svg
                 className='w-[18px] h-[18px] group-hover:bg-blue-500/10 rounded-full p-[2px] transition-colors'
                 fill='none'
@@ -300,7 +310,7 @@ export function PostCard({
                 />
               </svg>
               <span>{views}K</span>
-            </button>
+            </div>
           </div>
         </div>
       </div>

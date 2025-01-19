@@ -139,9 +139,15 @@ const Dock: React.FC<DockProps> = ({
         style={{ ...getDockStyle(), ...visibilitySpring }}
       >
         {springs.map((spring, index) => {
-          const { icon: Icon, href, size: itemSize } = items[index];
+          const { icon: Icon, href, size: itemSize, label } = items[index];
           return (
-            <Link href={href} key={href} target='_blank'>
+            <Link
+              href={href}
+              key={href}
+              target='_blank'
+              aria-label={`Visit my ${label} profile`}
+              rel='noopener noreferrer'
+            >
               <MyAnimatedDiv
                 className='bg-[#060606] m-[5px] w-[50px] h-[50px] p-[10px]
                            rounded-lg border-[0.5px] border-gray-500/50 flex relative z-0
@@ -153,8 +159,9 @@ const Dock: React.FC<DockProps> = ({
                 style={spring}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
+                aria-hidden='true'
               >
-                <Icon size={itemSize ?? size} />
+                <Icon size={itemSize ?? size} aria-hidden='true' />
               </MyAnimatedDiv>
             </Link>
           );
