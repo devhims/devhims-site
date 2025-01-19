@@ -5,13 +5,6 @@ import Link from 'next/link';
 import { RightSidebar } from '@/components/right-sidebar';
 import AuroraEffect from '@/components/AuroraEffect';
 
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogClose,
-  DialogTitle,
-} from '@/components/ui/dialog';
 import { Suspense } from 'react';
 import { SocialDock } from '@/components/social-dock';
 import MainNav from '@/components/main-nav';
@@ -20,6 +13,7 @@ import MailButton from '@/components/mail-button';
 import ProfileTabs from '@/components/profile-tabs';
 import { MailButtonSkeleton } from '@/components/skeletons/mail-button-skeleton';
 import MainNavSkeleton from '@/components/skeletons/main-nav-skeleton';
+import { ProfileImage } from '@/components/profile-image';
 
 export default function ProfilePage() {
   return (
@@ -42,39 +36,7 @@ export default function ProfilePage() {
 
           {/* Profile Info */}
           <div className='px-4 py-3 relative'>
-            <div className='absolute -top-16 left-4'>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Image
-                    src='/profile.webp'
-                    alt='Profile picture'
-                    className='rounded-full border-4 border-black object-cover aspect-square object-[50%_25%] cursor-pointer hover:opacity-90 transition-opacity'
-                    width={150}
-                    height={150}
-                    priority={true}
-                  />
-                </DialogTrigger>
-
-                {/* DialogContent with visually hidden title + close button in the top-left corner */}
-                <DialogContent className='max-w-[600px] !p-0 !gap-0 bg-transparent border-none overflow-hidden flex items-center justify-center min-h-screen'>
-                  <DialogTitle className='sr-only'>Profile Picture</DialogTitle>
-
-                  <Image
-                    src='/profile.webp'
-                    alt='Profile picture'
-                    className='rounded-full object-cover aspect-square object-[50%_25%]'
-                    width={400}
-                    height={400}
-                    priority={true}
-                  />
-
-                  <DialogClose className='fixed top-10 left-5 text-white rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none'>
-                    <X className='h-8 w-8' />
-                    <span className='sr-only'>Close</span>
-                  </DialogClose>
-                </DialogContent>
-              </Dialog>
-            </div>
+            <ProfileImage />
 
             <div className='absolute top-5 right-4'>
               <div className='flex items-center gap-2'>

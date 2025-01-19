@@ -40,13 +40,13 @@ export default function ProfileTabs() {
             <ProjectCard
               title='RAG-based Document Chat'
               description='A knowledge retrieval system enabling secure document storage, chat, and Q&A functionality. Built with Next.js, Vector Databases, OpenAI APIs, and Langchain. Achieved 40% faster data retrieval and 70% reduction in manual processing time.'
-              image='/sample.jpeg'
+              image='/profile.webp'
               link='#'
             />
             <ProjectCard
               title='3D Editor & AR Viewer'
               description='A web-based 3D model editor and AR viewer supporting both Android and iOS. Built with Next.js, React Three Fiber, WebXR, and 8th Wall. Features an intuitive interface and cross-platform compatibility.'
-              image='/sample.jpeg'
+              image='/profile.webp'
               link='https://3d-web-editor.vercel.app/'
             />
           </div>
