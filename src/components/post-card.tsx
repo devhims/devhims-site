@@ -16,7 +16,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { X } from 'lucide-react';
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 
 interface PostCardProps {
   profileImage: string;
@@ -33,13 +33,13 @@ interface PostCardProps {
   index: number;
 }
 
-function formatContentWithHashtags(content: string) {
-  return content.replace(
-    /#\w+/g,
-    (match) =>
-      `<span class="text-blue-400 font-bold hover:underline cursor-pointer">${match}</span>`
-  );
-}
+// function formatContentWithHashtags(content: string) {
+//   return content.replace(
+//     /#\w+/g,
+//     (match) =>
+//       `<span class="text-blue-400 font-bold hover:underline cursor-pointer">${match}</span>`
+//   );
+// }
 
 function getPostImageProps(imageUrl: string, alt: string) {
   return getImageProps({
@@ -209,10 +209,10 @@ export function PostCard({
   const profileImageProps = getPostImageProps(profileImage, name);
   const shouldLoadEager = index < 4;
 
-  const formattedContent = useMemo(
-    () => formatContentWithHashtags(content),
-    [content]
-  );
+  // const formattedContent = useMemo(
+  //   () => formatContentWithHashtags(content),
+  //   [content]
+  // );
 
   return (
     <article
