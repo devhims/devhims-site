@@ -16,6 +16,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { X } from 'lucide-react';
+import { useMemo } from 'react';
 
 interface PostCardProps {
   profileImage: string;
@@ -33,20 +34,11 @@ interface PostCardProps {
 }
 
 function formatContentWithHashtags(content: string) {
-  const parts = content.split(/(#\w+)/g);
-  return parts.map((part, index) => {
-    if (part.startsWith('#')) {
-      return (
-        <span
-          key={index}
-          className='text-blue-400 font-bold hover:underline cursor-pointer'
-        >
-          {part}
-        </span>
-      );
-    }
-    return part;
-  });
+  return content.replace(
+    /#\w+/g,
+    (match) =>
+      `<span class="text-blue-400 font-bold hover:underline cursor-pointer">${match}</span>`
+  );
 }
 
 function getPostImageProps(imageUrl: string, alt: string) {
@@ -217,8 +209,16 @@ export function PostCard({
   const profileImageProps = getPostImageProps(profileImage, name);
   const shouldLoadEager = index < 4;
 
+  const formattedContent = useMemo(
+    () => formatContentWithHashtags(content),
+    [content]
+  );
+
   return (
-    <article className='border-b border-gray-800 px-4 py-3 hover:bg-gray-900/30 transition-colors cursor-pointer'>
+    <article
+      className='border-b border-gray-800 px-4 py-3 hover:bg-gray-900/30 transition-colors cursor-pointer'
+      style={{ contentVisibility: index > 8 ? 'auto' : 'visible' }}
+    >
       <div className='flex gap-3'>
         <div className='flex-shrink-0'>
           <NextImage
@@ -231,6 +231,7 @@ export function PostCard({
             quality={65}
           />
         </div>
+
         <div className='flex-1 min-w-0'>
           <div className='flex flex-wrap items-center gap-x-1 text-[15px]'>
             <div className='flex items-center gap-1 min-w-0 flex-shrink'>
@@ -254,9 +255,10 @@ export function PostCard({
             </div>
           </div>
 
-          <p className='mt-1 text-[15px] whitespace-pre-wrap break-words text-gray-200'>
-            {formatContentWithHashtags(content)}
-          </p>
+          <div
+            className='mt-1 text-[15px] whitespace-pre-wrap break-words text-gray-200'
+            dangerouslySetInnerHTML={{ __html: formattedContent }}
+          />
 
           {mediaUrls && mediaUrls.length > 0 && (
             <div className='mt-3'>

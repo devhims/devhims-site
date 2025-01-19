@@ -44,9 +44,9 @@ export const posts = [
     date: 'Oct 5, 2019',
     content: `October 5th and 6th at #gdg #devfest19 #nagpur turned out to be the most eventful days of 2019 so far.
   
-  𝐃𝐚𝐲 𝟏: Lightning talk on "the recipe of great AR."
-  𝐃𝐚𝐲 𝟐: Hands-on session on the implementation of light estimation API (ARCore).
-  𝐓𝐨𝐭𝐚𝐥 𝐬𝐥𝐞𝐞𝐩 𝐭𝐢𝐦𝐞: 10 hours combined. 🙈`,
+𝐃𝐚𝐲 𝟏: Lightning talk on "the recipe of great AR."
+𝐃𝐚𝐲 𝟐: Hands-on session on the implementation of light estimation API (ARCore).
+𝐓𝐨𝐭𝐚𝐥 𝐬𝐥𝐞𝐞𝐩 𝐭𝐢𝐦𝐞: 10 hours combined. 🙈`,
     mediaUrls: [
       '/post-images/gdg/4.jpeg',
       '/post-images/gdg/2.jpeg',
@@ -66,9 +66,9 @@ export const posts = [
     date: 'July 11, 2019',
     content: `July 11th is my birthday, and also the day I do an annual review of my augmented reality projects and share the work done since last year with friends and close contacts. 
   
-  Here are some glimpses from this year's event. 
-  
-  #augmentedreality #wework #meetup`,
+Here are some glimpses from this year's event. 
+
+#augmentedreality #wework #meetup`,
     mediaUrls: [
       '/post-images/unity/1.jpeg',
       '/post-images/unity/2.jpeg',
