@@ -1,21 +1,21 @@
 import NextImage, { getImageProps } from 'next/image';
-import {
-  Carousel,
-  CarouselMainContainer,
-  SliderMainItem,
-  CarouselPrevious,
-  CarouselNext,
-  CarouselThumbsContainer,
-  SliderThumbItem,
-} from '@/components/MultiCarousel';
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogClose,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { X } from 'lucide-react';
+// import {
+//   Carousel,
+//   CarouselMainContainer,
+//   SliderMainItem,
+//   CarouselPrevious,
+//   CarouselNext,
+//   CarouselThumbsContainer,
+//   SliderThumbItem,
+// } from '@/components/MultiCarousel';
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogTrigger,
+//   DialogClose,
+//   DialogTitle,
+// } from '@/components/ui/dialog';
+// import { X } from 'lucide-react';
 import { useMemo } from 'react';
 
 interface PostCardProps {
