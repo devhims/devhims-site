@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import NextImage, { getImageProps } from 'next/image';
 import {
   Carousel,
   CarouselMainContainer,
@@ -16,6 +16,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { X } from 'lucide-react';
+import { useEffect } from 'react';
 
 interface PostCardProps {
   profileImage: string;
@@ -50,6 +51,42 @@ function formatContentWithHashtags(content: string) {
   });
 }
 
+function getPostImageProps(imageUrl: string, alt: string) {
+  return getImageProps({
+    width: 48,
+    height: 48,
+    quality: 65,
+    src: imageUrl,
+    alt: alt,
+  });
+}
+
+function usePrefetchPostImage(imageUrl: string | undefined, name: string) {
+  useEffect(() => {
+    if (!imageUrl) return;
+
+    const prefetchProps = getImageProps({
+      height: 256,
+      quality: 80,
+      width: 256,
+      src: imageUrl,
+      alt: `Post image of ${name}`,
+    });
+
+    try {
+      const iprops = prefetchProps.props;
+      const img = new Image();
+      img.fetchPriority = 'low';
+      img.decoding = 'async';
+      if (iprops.sizes) img.sizes = iprops.sizes;
+      if (iprops.srcSet) img.srcset = iprops.srcSet;
+      if (iprops.src) img.src = iprops.src;
+    } catch (e) {
+      console.error('Failed to preload image:', prefetchProps.props.src, e);
+    }
+  }, [imageUrl, name]);
+}
+
 function PostMediaCarousel({
   mediaUrls,
   isActiveTab = false,
@@ -73,15 +110,16 @@ function PostMediaCarousel({
                   role='button'
                   aria-label={`View enlarged post media ${index + 1}`}
                 >
-                  <Image
+                  <NextImage
                     src={url}
                     alt={`Post media ${index + 1}`}
                     fill
                     sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                     className='object-cover'
-                    priority={isActiveTab && index === 0}
                     loading={isActiveTab && index === 0 ? 'eager' : 'lazy'}
-                    quality={75}
+                    decoding={isActiveTab && index === 0 ? 'sync' : 'async'}
+                    quality={65}
+                    fetchPriority={isActiveTab && index === 0 ? 'high' : 'low'}
                   />
                 </div>
               </DialogTrigger>
@@ -97,7 +135,7 @@ function PostMediaCarousel({
                 className='bg-transparent'
               >
                 <div className='relative aspect-square rounded-md border border-gray-800 overflow-hidden'>
-                  <Image
+                  <NextImage
                     src={url}
                     alt={`Thumbnail ${index + 1}`}
                     fill
@@ -121,7 +159,7 @@ function PostMediaCarousel({
                 className='bg-transparent h-full flex items-center justify-center'
               >
                 <div className='relative w-full h-full'>
-                  <Image
+                  <NextImage
                     src={url}
                     alt={`Post media ${index + 1}`}
                     fill
@@ -194,17 +232,21 @@ export function PostCard({
   mediaUrls,
   isActiveTab = false,
 }: PostCardProps) {
+  const profileImageProps = getPostImageProps(profileImage, name);
+
+  // Prefetch the first media image if available and tab is active
+  usePrefetchPostImage(isActiveTab ? mediaUrls?.[0] : undefined, name);
+
   return (
     <article className='border-b border-gray-800 px-4 py-3 hover:bg-gray-900/30 transition-colors cursor-pointer'>
       <div className='flex gap-3'>
         <div className='flex-shrink-0'>
-          <Image
-            src={profileImage}
-            alt={name}
-            width={48}
-            height={48}
+          <NextImage
+            {...profileImageProps.props}
             className='rounded-full object-cover w-12 h-12'
-            priority={isActiveTab}
+            src={profileImage}
+            loading={isActiveTab ? 'eager' : 'lazy'}
+            decoding={isActiveTab ? 'sync' : 'async'}
           />
         </div>
         <div className='flex-1 min-w-0'>
@@ -212,13 +254,14 @@ export function PostCard({
             <div className='flex items-center gap-1 min-w-0 flex-shrink'>
               <span className='font-bold hover:underline truncate'>{name}</span>
               {isVerified && (
-                <Image
+                <NextImage
                   src='/blue-twitter-verified-sign.svg'
                   alt='Verified'
                   width={14}
                   height={14}
                   className='inline-block flex-shrink-0'
                   loading='lazy'
+                  decoding='async'
                 />
               )}
             </div>
