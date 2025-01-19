@@ -16,7 +16,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { X } from 'lucide-react';
-// import { useMemo } from 'react';
+import { useMemo } from 'react';
 
 interface PostCardProps {
   profileImage: string;
@@ -33,13 +33,13 @@ interface PostCardProps {
   index: number;
 }
 
-// function formatContentWithHashtags(content: string) {
-//   return content.replace(
-//     /#\w+/g,
-//     (match) =>
-//       `<span class="text-blue-400 font-bold hover:underline cursor-pointer">${match}</span>`
-//   );
-// }
+function formatContentWithHashtags(content: string) {
+  return content.replace(
+    /#\w+/g,
+    (match) =>
+      `<span class="text-blue-400 font-bold hover:underline cursor-pointer">${match}</span>`
+  );
+}
 
 function getPostImageProps(imageUrl: string, alt: string) {
   return getImageProps({
@@ -198,20 +198,21 @@ export function PostCard({
   handle,
   isVerified = false,
   date,
+  content,
   likes = 0,
   retweets = 0,
   replies = 0,
   views = 0,
-  mediaUrls,
+  // mediaUrls,
   index,
 }: PostCardProps) {
   const profileImageProps = getPostImageProps(profileImage, name);
   const shouldLoadEager = index < 4;
 
-  // const formattedContent = useMemo(
-  //   () => formatContentWithHashtags(content),
-  //   [content]
-  // );
+  const formattedContent = useMemo(
+    () => formatContentWithHashtags(content),
+    [content]
+  );
 
   return (
     <article
@@ -254,16 +255,16 @@ export function PostCard({
             </div>
           </div>
 
-          {/* <div
+          <div
             className='mt-1 text-[15px] whitespace-pre-wrap break-words text-gray-200'
             dangerouslySetInnerHTML={{ __html: formattedContent }}
-          /> */}
+          />
 
-          {mediaUrls && mediaUrls.length > 0 && (
+          {/* {mediaUrls && mediaUrls.length > 0 && (
             <div className='mt-3'>
               <PostMediaCarousel mediaUrls={mediaUrls} index={index} />
             </div>
-          )}
+          )} */}
 
           <div className='flex justify-between mt-4 text-gray-400 text-sm max-w-md'>
             <div className='flex items-center gap-1 hover:text-blue-500 group transition-colors'>
