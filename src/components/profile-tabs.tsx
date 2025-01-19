@@ -1,5 +1,5 @@
 // profile-tabs.tsx
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { posts, experienceData, tabItems, routes } from '@/constants';
 import { PostCard } from '@/components/post-card';
 import { Timeline } from '@/components/timeline';
