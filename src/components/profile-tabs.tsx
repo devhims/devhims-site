@@ -5,14 +5,14 @@ import { PostCard } from '@/components/post-card';
 import { Timeline } from '@/components/timeline';
 import { ProjectCard } from '@/components/project-card';
 import ContactForm from './ContactForm';
-import { TabSwitcher } from './tab-switcher-client';
-import { Suspense } from 'react';
+// import { TabSwitcher } from './tab-switcher-client';
+// import { Suspense } from 'react';
 
 export default function ProfileTabs() {
   const defaultTab = routes[0].tab;
 
   // Server-rendered content independent of active tab
-  const tabContent = (
+  return (
     <Tabs defaultValue={defaultTab} className='mt-4'>
       <TabsList className='w-full flex justify-around bg-transparent h-auto relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-gray-500/50'>
         {tabItems.map((tab) => (
@@ -64,9 +64,9 @@ export default function ProfileTabs() {
     </Tabs>
   );
 
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <TabSwitcher defaultTab={defaultTab}>{tabContent}</TabSwitcher>
-    </Suspense>
-  );
+  // return (
+  //   <Suspense fallback={<div>Loading...</div>}>
+  //     <TabSwitcher defaultTab={defaultTab}>{tabContent}</TabSwitcher>
+  //   </Suspense>
+  // );
 }
