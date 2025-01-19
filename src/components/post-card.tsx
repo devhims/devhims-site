@@ -198,7 +198,6 @@ export function PostCard({
   handle,
   isVerified = false,
   date,
-  content,
   likes = 0,
   retweets = 0,
   replies = 0,
