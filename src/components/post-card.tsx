@@ -255,10 +255,10 @@ export function PostCard({
             </div>
           </div>
 
-          <div
+          {/* <div
             className='mt-1 text-[15px] whitespace-pre-wrap break-words text-gray-200'
             dangerouslySetInnerHTML={{ __html: formattedContent }}
-          />
+          /> */}
 
           {mediaUrls && mediaUrls.length > 0 && (
             <div className='mt-3'>
