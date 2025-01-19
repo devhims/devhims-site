@@ -16,7 +16,7 @@ import { Suspense } from 'react';
 import { SocialDock } from '@/components/social-dock';
 import MainNav from '@/components/main-nav';
 import MailButton from '@/components/mail-button';
-import { ProfileTabsSkeleton } from '@/components/skeletons/profile-tabs-skeleton';
+// import { ProfileTabsSkeleton } from '@/components/skeletons/profile-tabs-skeleton';
 import ProfileTabs from '@/components/profile-tabs';
 import { MailButtonSkeleton } from '@/components/skeletons/mail-button-skeleton';
 import MainNavSkeleton from '@/components/skeletons/main-nav-skeleton';
@@ -144,9 +144,7 @@ export default function ProfilePage() {
 
           {/* Tabs */}
 
-          <Suspense fallback={<ProfileTabsSkeleton />}>
-            <ProfileTabs />
-          </Suspense>
+          <ProfileTabs />
         </main>
         <RightSidebar className='hidden lg:block shrink-0 lg:sticky lg:top-0 lg:h-screen' />
       </div>
