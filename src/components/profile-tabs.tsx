@@ -5,6 +5,7 @@ import { PostCard } from '@/components/post-card';
 import { Timeline } from '@/components/timeline';
 import { ProjectCard } from '@/components/project-card';
 import ContactForm from './ContactForm';
+import { TabsContainer } from '@/components/tabs-container';
 // import { TabSwitcher } from './tab-switcher-client';
 // import { Suspense } from 'react';
 
@@ -13,7 +14,7 @@ export default function ProfileTabs() {
 
   // Server-rendered content independent of active tab
   return (
-    <Tabs defaultValue={defaultTab} className='mt-4'>
+    <TabsContainer defaultTab={defaultTab}>
       <TabsList className='w-full flex justify-around bg-transparent h-auto relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-gray-500/50'>
         {tabItems.map((tab) => (
           <TabsTrigger
@@ -61,7 +62,7 @@ export default function ProfileTabs() {
           <ContactForm />
         </TabsContent>
       </div>
-    </Tabs>
+    </TabsContainer>
   );
 
   // return (
