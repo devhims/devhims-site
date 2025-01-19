@@ -2,13 +2,15 @@
 
 import { Tabs } from '@/components/ui/tabs';
 import { useSwipeableTab } from '@/hooks/useSwipeableTab';
+import { Suspense } from 'react';
 
 interface TabsContainerProps {
   defaultTab: string;
   children: React.ReactNode;
 }
 
-export function TabsContainer({ defaultTab, children }: TabsContainerProps) {
+// Inner component that uses the hook
+function TabsContent({ defaultTab, children }: TabsContainerProps) {
   const { activeTab, handleTabChange, swipeHandlers } =
     useSwipeableTab(defaultTab);
 
@@ -20,6 +22,32 @@ export function TabsContainer({ defaultTab, children }: TabsContainerProps) {
         onValueChange={handleTabChange}
         className='mt-4'
       >
+        {children}
+      </Tabs>
+    </div>
+  );
+}
+
+// Outer component that provides Suspense boundary
+export function TabsContainer(props: TabsContainerProps) {
+  return (
+    <Suspense
+      fallback={
+        <TabsFallback defaultTab={props.defaultTab}>
+          {props.children}
+        </TabsFallback>
+      }
+    >
+      <TabsContent {...props} />
+    </Suspense>
+  );
+}
+
+// Fallback component that shows initial state while loading
+function TabsFallback({ defaultTab, children }: TabsContainerProps) {
+  return (
+    <div className='w-full min-h-screen'>
+      <Tabs defaultValue={defaultTab} className='mt-4'>
         {children}
       </Tabs>
     </div>
