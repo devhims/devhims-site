@@ -1,12 +1,10 @@
 import Image from 'next/image';
 import { MapPin, LinkIcon, CalendarDays } from 'lucide-react';
 import Link from 'next/link';
-// import { cn } from '@/lib/utils';
 import { ProfileImage } from './profile-image';
-import MailButtonWrapper from './mail-button-wrapper';
-// import { MailButtonSkeleton } from '@/components/skeletons/mail-button-skeleton';
+import { MailButtonSkeleton } from '@/components/skeletons/mail-button-skeleton';
 import { Button } from '@/components/ui/button';
-// import { Suspense } from 'react';
+import { Suspense } from 'react';
 import MailButton from './mail-button';
 
 export default function Bio({ className }: { className?: string }) {
@@ -16,13 +14,9 @@ export default function Bio({ className }: { className?: string }) {
         <ProfileImage />
         <div className='flex justify-end'>
           <div className='flex items-center gap-2'>
-            {/* <Suspense fallback={<MailButtonSkeleton />}>
+            <Suspense fallback={<MailButtonSkeleton />}>
               <MailButton />
-            </Suspense> */}
-
-            <MailButtonWrapper>
-              <MailButton />
-            </MailButtonWrapper>
+            </Suspense>
 
             <Button
               asChild
