@@ -36,7 +36,6 @@ export const ProfileImage = () => {
             className='rounded-full object-cover aspect-square object-[55%_25%]'
             width={400}
             height={400}
-            priority={false}
             quality={100}
             loading='lazy'
           />
