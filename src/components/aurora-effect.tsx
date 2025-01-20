@@ -113,7 +113,7 @@ color += color * flicker;
 }
 `;
 
-export default function AuroraEffect() {
+export default function AuroraEffect({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.OrthographicCamera | null>(null);
@@ -216,13 +216,11 @@ export default function AuroraEffect() {
 
   return (
     <div
+      className={`relative ${className}`}
       ref={containerRef}
       style={{
         position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
+        inset: 0,
         zIndex: 0,
         background: 'transparent',
       }}

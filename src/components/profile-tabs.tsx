@@ -4,7 +4,7 @@ import { posts, experienceData, tabItems, routes } from '@/constants';
 import { PostCard } from '@/components/post-card';
 import { Timeline } from '@/components/timeline';
 import { ProjectCard } from '@/components/project-card';
-import ContactForm from './ContactForm';
+import ContactForm from '@/components/contact-form';
 import { TabsContainer } from '@/components/tabs-container';
 
 export default function ProfileTabs() {

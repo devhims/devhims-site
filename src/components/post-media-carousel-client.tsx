@@ -7,7 +7,7 @@ import {
   SliderMainItem,
   CarouselPrevious,
   CarouselNext,
-} from '@/components/MultiCarousel';
+} from '@/components/multi-carousel';
 import {
   Dialog,
   DialogContent,

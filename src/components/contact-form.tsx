@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import SpotlightCard from '@/components/SpotlightCard';
+import SpotlightCard from '@/components/spotlight-card';
 import { toast } from 'sonner';
 import { submitContactForm } from '@/app/actions';
 import { SocialDock } from './social-dock';

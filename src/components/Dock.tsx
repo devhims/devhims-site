@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSpring, useSprings } from '@react-spring/web';
 import Link from 'next/link';
-import MyAnimatedDiv from './MyAnimatedDiv';
+import MyAnimatedDiv from './animated-div';
 
 interface DockItem {
   href: string;

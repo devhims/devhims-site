@@ -1,7 +1,7 @@
 'use client';
 
 import { Tabs } from '@/components/ui/tabs';
-import { useSwipeableTab } from '@/hooks/useSwipeableTab';
+import { useSwipeableTab } from '@/hooks/use-swipeable-tab';
 import { Suspense } from 'react';
 
 interface TabsContainerProps {

@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { HoverEffect } from '@/components/ui/card-hover-effect';
-import SpotlightCard from './SpotlightCard';
+import SpotlightCard from './spotlight-card';
 
 export function RightSidebar({ className }: { className?: string }) {
   return (

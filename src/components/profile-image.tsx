@@ -10,20 +10,27 @@ import { X } from 'lucide-react';
 
 export const ProfileImage = () => {
   return (
-    <div className='absolute -top-16 left-4'>
+    <div className='absolute -top-[60px] sm:-top-[75px] left-2 sm:left-4'>
       <Dialog>
         <DialogTrigger asChild>
-          {/* Small screens */}
-          <Image
-            src='/profile2.webp'
-            alt='Profile picture'
-            className='rounded-full border-4 border-black object-cover aspect-square object-[50%_25%] cursor-pointer hover:opacity-90 transition-opacity'
-            width={150}
-            height={150}
-            priority={true}
-            quality={80}
-            loading='eager'
-          />
+          <div
+            className='w-[120px] h-[120px] sm:w-[150px] sm:h-[150px]'
+            role='button'
+            aria-label='Open profile picture'
+            aria-haspopup='dialog'
+          >
+            <Image
+              src='/profile2.webp'
+              alt='Profile'
+              className='rounded-full border-4 border-black object-cover aspect-square object-[50%_25%] cursor-pointer hover:opacity-90 transition-opacity'
+              width={150}
+              height={150}
+              sizes='(max-width: 640px) 120px, 150px'
+              priority={true}
+              quality={80}
+              loading='eager'
+            />
+          </div>
         </DialogTrigger>
 
         {/* Modal Image */}
@@ -32,10 +39,11 @@ export const ProfileImage = () => {
 
           <Image
             src='/profile.webp'
-            alt='Profile picture'
+            alt='Profile'
             className='rounded-full object-cover aspect-square object-[55%_25%]'
             width={400}
             height={400}
+            sizes='(max-width: 640px) 300px, 400px'
             quality={100}
             loading='lazy'
           />

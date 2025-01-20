@@ -59,7 +59,7 @@ export const posts = [
     views: 2.5,
   },
   {
-    profileImage: '/profile.webp',
+    profileImage: '/profile2.webp',
     name: 'Himanshu Gupta',
     handle: 'devhims',
     isVerified: true,
