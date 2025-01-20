@@ -1,7 +1,7 @@
 import { TimelineItemProps } from '@/components/timeline';
 import { Home, BookOpen, Briefcase, Code2, Mail } from 'lucide-react';
 
-export const blogUrl = 'https://blog.devhims.com';
+export const blogUrl = 'https://devhims-blog.vercel.app';
 
 export const routes = [
   { label: 'Home', icon: Home, tab: 'posts' },
