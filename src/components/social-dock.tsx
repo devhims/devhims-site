@@ -5,8 +5,8 @@ import { LinkedinLogo } from '@/components/icons/LinkedinLogo';
 import { GithubIcon } from '@/components/icons/GithubIcon';
 import { InstagramIcon } from '@/components/icons/InstagramIcon';
 import { YoutubeIcon } from '@/components/icons/YoutubeIcon';
-import Dock from '@/components/dock';
-import { type DockProps } from '@/components/dock';
+import Dock from '@/components/Dock';
+import { type DockProps } from '@/components/Dock';
 
 const socialLinks = [
   {
