@@ -1,10 +1,9 @@
-import { Suspense } from 'react';
 import { SocialDock } from '@/components/social-dock';
 import { RightSidebar } from '@/components/right-sidebar';
 import AuroraEffect from '@/components/aurora-effect';
 import MainNav from '@/components/main-nav';
 import ProfileTabs from '@/components/profile-tabs';
-import MainNavSkeleton from '@/components/skeletons/main-nav-skeleton';
+
 import Bio from '@/components/bio';
 
 export default function ProfilePage() {
@@ -12,9 +11,7 @@ export default function ProfilePage() {
     <div className='min-h-screen bg-black text-white'>
       <div className='container mx-auto flex flex-col md:flex-row justify-center gap-2 px-2'>
         <div className='hidden md:flex flex-col shrink-0 md:sticky md:top-0 md:h-screen'>
-          <Suspense fallback={<MainNavSkeleton />}>
-            <MainNav />
-          </Suspense>
+          <MainNav />
           <div className='px-4 mt-auto pb-4'>
             <SocialDock />
           </div>
