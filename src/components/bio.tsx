@@ -5,6 +5,8 @@ import { ProfileImage } from './profile-image';
 import { Button } from '@/components/ui/button';
 import MailButton from './mail-button';
 import { blueTwitterVerifiedSign } from '@/constants';
+import { Suspense } from 'react';
+import { MailButtonSkeleton } from './skeletons/mail-button-skeleton';
 
 export default function Bio({ className }: { className?: string }) {
   return (
@@ -13,7 +15,9 @@ export default function Bio({ className }: { className?: string }) {
         <ProfileImage />
         <div className='flex justify-end'>
           <div className='flex items-center gap-2'>
-            <MailButton />
+            <Suspense fallback={<MailButtonSkeleton />}>
+              <MailButton />
+            </Suspense>
             <Button
               asChild
               variant='outline'

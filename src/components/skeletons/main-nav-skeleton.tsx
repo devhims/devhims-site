@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { routes } from '@/constants';
 
-export default function MainNavSkeleton({ className }: { className?: string }) {
+export function MainNavSkeleton({ className }: { className?: string }) {
   return (
     <nav className={cn('flex flex-col gap-2 p-4', className)}>
       {routes.map((route) => {
