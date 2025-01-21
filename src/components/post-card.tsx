@@ -1,7 +1,7 @@
 // post-card.tsx
 import NextImage from 'next/image';
 import { PostMediaCarousel } from './post-media-carousel';
-import { PostInteractionBar } from './post-interaction-bar-client';
+import { PostInteractionBar } from './post-interaction-bar';
 import { blueTwitterVerifiedSign } from '@/constants';
 
 interface PostCardProps {
