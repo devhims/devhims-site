@@ -2,6 +2,7 @@
 import NextImage from 'next/image';
 import { PostMediaCarousel } from './post-media-carousel';
 import { PostInteractionBar } from './post-interaction-bar-client';
+import { blueTwitterVerifiedSign } from '@/constants';
 
 interface PostCardProps {
   profileImage: string;
@@ -73,7 +74,7 @@ export function PostCard({
               <span className='font-bold hover:underline truncate'>{name}</span>
               {isVerified && (
                 <NextImage
-                  src='/blue-twitter-verified-sign.svg'
+                  src={blueTwitterVerifiedSign}
                   alt='Verified'
                   width={14}
                   height={14}

@@ -1,3 +1,4 @@
+import 'server-only';
 import { db } from '@/db';
 import { messages } from '@/db/schema';
 // import { desc } from 'drizzle-orm';

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ProfileImage } from './profile-image';
 import { Button } from '@/components/ui/button';
 import MailButton from './mail-button';
+import { blueTwitterVerifiedSign } from '@/constants';
 
 export default function Bio({ className }: { className?: string }) {
   return (
@@ -30,7 +31,7 @@ export default function Bio({ className }: { className?: string }) {
           <h1 className='text-xl font-black flex items-center gap-1'>
             Himanshu Gupta
             <Image
-              src='/blue-twitter-verified-sign.svg'
+              src={blueTwitterVerifiedSign}
               alt='verified'
               width={20}
               height={20}

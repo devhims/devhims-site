@@ -29,7 +29,10 @@ export function PostMediaCarouselDialog({
   mediaUrls: string[];
 }) {
   return (
-    <DialogContent className='max-w-[90vw] h-[90vh] !p-0 !gap-0 bg-transparent border-none overflow-hidden'>
+    <DialogContent
+      hideCloseButton={true}
+      className='max-w-[90vw] h-[90vh] !p-0 !gap-0 bg-transparent border-none overflow-hidden'
+    >
       <DialogTitle className='sr-only'>View post media</DialogTitle>
       <Carousel className='relative h-full' aria-label='Media carousel'>
         <CarouselMainContainer className='h-full group'>
@@ -63,10 +66,7 @@ export function PostMediaCarouselDialog({
           </>
         )}
       </Carousel>
-      <DialogClose
-        className='absolute top-2 right-2 sm:top-4 sm:right-4 rounded-full bg-black/60 p-1.5 sm:p-2 opacity-70 hover:opacity-100 transition-opacity focus:outline-none disabled:pointer-events-none z-50'
-        aria-label='Close dialog'
-      >
+      <DialogClose className='absolute top-2 right-2 sm:top-4 sm:right-4 rounded-full bg-black/60 p-1.5 sm:p-2 opacity-70 hover:opacity-100 transition-opacity focus:outline-none disabled:pointer-events-none z-50'>
         <X className='h-4 w-4 sm:h-5 sm:w-5 text-white' strokeWidth={2.5} />
         <span className='sr-only'>Close</span>
       </DialogClose>

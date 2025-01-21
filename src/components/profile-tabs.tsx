@@ -6,6 +6,7 @@ import { Timeline } from '@/components/timeline';
 import { ProjectCard } from '@/components/project-card';
 import ContactForm from '@/components/contact-form';
 import { TabsContainer } from '@/components/tabs-container';
+import { profileImageLarge } from '@/constants';
 
 export default function ProfileTabs() {
   const defaultTab = routes[0].tab;
@@ -40,7 +41,7 @@ export default function ProfileTabs() {
             <ProjectCard
               title='RAG-based Document Chat'
               description='A knowledge retrieval system enabling secure document storage, chat, and Q&A functionality. Built with Next.js, Vector Databases, OpenAI APIs, and Langchain. Achieved 40% faster data retrieval and 70% reduction in manual processing time.'
-              image='/profile.webp'
+              image={profileImageLarge}
               link='#'
             />
             <ProjectCard

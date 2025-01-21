@@ -6,7 +6,7 @@ import { headers } from 'next/headers';
 import { Redis } from '@upstash/redis';
 import { Ratelimit } from '@upstash/ratelimit';
 import { createHash } from 'crypto';
-import { saveMessage } from '@/lib/messages';
+import { saveMessage } from '@/_data/messages';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const redis = new Redis({
