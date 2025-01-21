@@ -7,6 +7,7 @@ export const blogUrl = 'https://devhims-blog.vercel.app';
 export const profileImageSmall = blobUrls.PROFILE2;
 export const profileImageLarge = blobUrls.PROFILE;
 export const blueTwitterVerifiedSign = blobUrls['BLUE-TWITTER-VERIFIED-SIGN'];
+export const noise = blobUrls.NOISE;
 
 export const routes = [
   { label: 'Home', icon: Home, tab: 'posts' },

@@ -47,7 +47,7 @@ export default function ProfileTabs() {
             <ProjectCard
               title='3D Editor & AR Viewer'
               description='A web-based 3D model editor and AR viewer supporting both Android and iOS. Built with Next.js, React Three Fiber, WebXR, and 8th Wall. Features an intuitive interface and cross-platform compatibility.'
-              image='/profile.webp'
+              image={profileImageLarge}
               link='https://3d-web-editor.vercel.app/'
             />
           </div>

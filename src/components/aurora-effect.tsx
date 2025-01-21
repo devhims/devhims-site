@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { noise } from '@/constants';
 
 const vertexShader = `
 varying vec2 vUv;
@@ -148,8 +149,8 @@ export default function AuroraEffect({ className }: { className?: string }) {
 
     // Create noise textures
     const noiseLoader = new THREE.TextureLoader();
-    const noiseTexture = noiseLoader.load('/noise.png');
-    const noiseTexture2 = noiseLoader.load('/noise.png');
+    const noiseTexture = noiseLoader.load(noise);
+    const noiseTexture2 = noiseLoader.load(noise);
     noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping;
     noiseTexture2.wrapS = noiseTexture2.wrapT = THREE.RepeatWrapping;
 
