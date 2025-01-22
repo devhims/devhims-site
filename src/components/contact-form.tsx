@@ -25,10 +25,10 @@ export default function ContactForm() {
   );
 
   useEffect(() => {
-    if (state.success) {
+    if (state.success && state.message.length > 0) {
       toast.success(state.message);
     }
-    if (!state.success) {
+    if (!state.success && state.message.length > 0) {
       toast.error(state.message);
     }
   }, [state]);
