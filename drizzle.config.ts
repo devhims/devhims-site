@@ -8,9 +8,12 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 export default {
   schema: './src/db/schema.ts',
   out: './migrations',
-  dialect: isDevelopment ? 'sqlite' : 'turso',
+  dialect: 'turso',
   dbCredentials: isDevelopment
-    ? { url: 'file:local.db' }
+    ? {
+        url: process.env.TURSO_DATABASE_URL_DEV!,
+        authToken: process.env.TURSO_AUTH_TOKEN_DEV!,
+      }
     : {
         url: process.env.TURSO_DATABASE_URL!,
         authToken: process.env.TURSO_AUTH_TOKEN,

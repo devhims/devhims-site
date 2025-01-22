@@ -8,8 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio",
+    "db:migrate:dev": "NODE_ENV=development drizzle-kit push",
+    "db:migrate:prod": "NODE_ENV=production drizzle-kit push",
+    "db:studio:dev": "NODE_ENV=development drizzle-kit studio",
+    "db:studio:prod": "NODE_ENV=production drizzle-kit studio",
     "sync-blobs": "tsx scripts/sync-blob-storage.ts"
   },
   "dependencies": {

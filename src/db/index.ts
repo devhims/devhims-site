@@ -5,7 +5,10 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 
 const client = createClient(
   isDevelopment
-    ? { url: 'file:local.db' }
+    ? {
+        url: process.env.TURSO_DATABASE_URL_DEV!,
+        authToken: process.env.TURSO_AUTH_TOKEN_DEV!,
+      }
     : {
         url: process.env.TURSO_DATABASE_URL!,
         authToken: process.env.TURSO_AUTH_TOKEN!,
