@@ -5,8 +5,6 @@ import { headers } from 'next/headers';
 import { saveMessage } from '@/_data/messages';
 import { after } from 'next/server';
 import { sendEmail, checkRateLimit, parseUserAgent } from '@/lib/services';
-// import { validateContactForm } from '@/lib/schemas/contactForm';
-
 import type { ContactFormResponse, ContactFormData } from '@/lib/types';
 
 const contactFormSchema = z.object({
@@ -35,7 +33,6 @@ export async function submitContactForm(
     }
 
     // 2. Validate input
-
     const rawData: ContactFormData = {
       name: formData.get('name') as string,
       email: formData.get('email') as string,
@@ -51,7 +48,7 @@ export async function submitContactForm(
       };
     }
 
-    // 3. Send email and save to database in parallel
+    // 3. Send email with system info
     const systemInfo = JSON.stringify({
       timestamp: new Date().toLocaleString('en-US', {
         dateStyle: 'full',
@@ -63,8 +60,6 @@ export async function submitContactForm(
       ip: ip,
       userAgent: parseUserAgent(headersList.get('user-agent') || 'unknown'),
     });
-
-    // Send email
     try {
       await sendEmail(validatedData.data);
     } catch (error) {
@@ -75,7 +70,7 @@ export async function submitContactForm(
       };
     }
 
-    // Save message to database after this action is complete
+    // 4. Save message to database after this action is complete
     after(async () => {
       try {
         await saveMessage({

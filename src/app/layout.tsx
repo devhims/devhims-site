@@ -21,6 +21,12 @@ export const metadata: Metadata = {
   title: 'Himanshu Gupta | Devhims',
   description:
     'Full-stack web developer and design engineer specializing in React, Next.js, and modern web technologies. Creating performant and beautiful web experiences from India.',
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL! || 'http://localhost:3000'
+  ),
+  openGraph: {
+    images: '/opengraph-image.png',
+  },
 };
 
 export default function RootLayout({

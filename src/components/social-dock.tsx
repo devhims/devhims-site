@@ -5,8 +5,12 @@ import { LinkedinLogo } from '@/components/icons/LinkedinLogo';
 import { GithubIcon } from '@/components/icons/GithubIcon';
 import { InstagramIcon } from '@/components/icons/InstagramIcon';
 import { YoutubeIcon } from '@/components/icons/YoutubeIcon';
-import Dock from '@/components/Dock';
+import dynamic from 'next/dynamic';
 import { type DockProps } from '@/components/Dock';
+
+const DockDynamic = dynamic(() => import('@/components/Dock'), {
+  ssr: false,
+});
 
 const socialLinks = [
   {
@@ -41,7 +45,7 @@ export function SocialDock({
   ...rest
 }: SocialDockProps = {}) {
   return (
-    <Dock
+    <DockDynamic
       collapsible={collapsible}
       position={position}
       responsive={responsive}

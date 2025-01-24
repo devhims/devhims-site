@@ -6,12 +6,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import SpotlightCard from '@/components/spotlight-card';
-import { toast } from 'sonner';
 import { submitContactForm } from '@/app/actions';
 import { SocialDock } from './social-dock';
 import { WavingHandIcon } from './icons/WavingHandIcon';
-
 import type { ContactFormResponse } from '@/lib/types';
+import { toast } from 'sonner';
 
 const initialState: ContactFormResponse = {
   success: false,
@@ -25,11 +24,12 @@ export default function ContactForm() {
   );
 
   useEffect(() => {
-    if (state.success && state.message.length > 0) {
-      toast.success(state.message);
-    }
-    if (!state.success && state.message.length > 0) {
-      toast.error(state.message);
+    if (state.message.length > 0) {
+      if (state.success) {
+        toast.success(state.message);
+      } else {
+        toast.error(state.message);
+      }
     }
   }, [state]);
 

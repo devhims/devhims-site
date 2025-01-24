@@ -15,7 +15,6 @@
     "sync-blobs": "tsx scripts/sync-blob-storage.ts"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.9.1",
     "@libsql/client": "^0.14.0",
     "@radix-ui/react-dialog": "^1.1.4",
     "@radix-ui/react-label": "^2.1.1",
@@ -40,7 +39,6 @@
     "next-themes": "^0.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-hook-form": "^7.54.2",
     "react-swipeable": "^7.0.2",
     "resend": "^4.0.1",
     "server-only": "^0.0.1",
