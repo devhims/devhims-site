@@ -6,6 +6,8 @@ import { saveMessage } from '@/_data/messages';
 import { after } from 'next/server';
 import { sendEmail, checkRateLimit, parseUserAgent } from '@/lib/services';
 import type { ContactFormResponse, ContactFormData } from '@/lib/types';
+import { cookies } from 'next/headers';
+import { SignJWT, jwtVerify } from 'jose';
 
 const contactFormSchema = z.object({
   name: z.string().min(2).max(100).trim(),
@@ -95,4 +97,73 @@ export async function submitContactForm(
       message: 'An unexpected error occurred',
     };
   }
+}
+
+interface RateLimitPayload {
+  deviceId: string;
+  attempts: number;
+  firstAttempt: number;
+  [key: string]: string | number;
+}
+
+const secretKey = process.env.RATE_LIMIT_SECRET!;
+const key = new TextEncoder().encode(secretKey);
+
+// Token management functions
+export async function generateInitialToken(): Promise<{
+  success: boolean;
+  message: string;
+  payload?: RateLimitPayload;
+}> {
+  const cookieStore = await cookies();
+
+  // Check if a token already exists
+  const existingToken = cookieStore.get('rate_limit')?.value;
+  if (existingToken) {
+    try {
+      // Verify the existing token
+      const { payload } = await jwtVerify(existingToken, key, {
+        algorithms: ['HS256'],
+      });
+
+      // Check if the token payload has valid data
+      if (
+        typeof payload.deviceId === 'string' &&
+        typeof payload.attempts === 'number' &&
+        typeof payload.firstAttempt === 'number'
+      ) {
+        return {
+          success: true,
+          message: 'Token exists',
+          payload: payload as RateLimitPayload,
+        };
+      }
+    } catch (error) {
+      // Token is invalid, we'll create a new one
+      console.error(`Token is invalid, we'll create a new one: ${error}`);
+    }
+  }
+
+  // Create new token
+  const payload: RateLimitPayload = {
+    deviceId: crypto.randomUUID(),
+    attempts: 0,
+    firstAttempt: Date.now(),
+  };
+
+  const token = await new SignJWT(payload)
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('1h')
+    .sign(key);
+
+  cookieStore.set('rate_limit', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    expires: new Date(Date.now() + 60 * 60 * 1000),
+    sameSite: 'strict',
+    path: '/',
+  });
+
+  return { success: true, message: 'Token generated', payload };
 }
