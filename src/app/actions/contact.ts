@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { saveMessage } from '@/_data/messages';
 import { after } from 'next/server';
 import type { ContactFormResponse, ContactFormData } from '@/lib/types';
-import { checkAndUpdateRateLimit } from './token';
+import { checkAndUpdateRateLimit } from './rate-limit';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);

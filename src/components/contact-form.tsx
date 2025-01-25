@@ -11,7 +11,7 @@ import { SocialDock } from './social-dock';
 import { WavingHandIcon } from './icons/WavingHandIcon';
 import type { ContactFormResponse } from '@/lib/types';
 import { toast } from 'sonner';
-import { generateInitialToken } from '@/app/actions/token';
+import { generateInitialToken } from '@/app/actions/rate-limit';
 
 const initialState: ContactFormResponse = {
   success: false,
