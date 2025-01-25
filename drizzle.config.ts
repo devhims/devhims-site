@@ -7,7 +7,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 
 export default {
   schema: './src/db/schema.ts',
-  out: './migrations',
+  out: './src/db/migrations',
   dialect: 'turso',
   dbCredentials: isDevelopment
     ? {

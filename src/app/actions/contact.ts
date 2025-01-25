@@ -1,11 +1,13 @@
 'use server';
 
 import { z } from 'zod';
-import { headers } from 'next/headers';
 import { saveMessage } from '@/_data/messages';
 import { after } from 'next/server';
-import { sendEmail, checkRateLimit, parseUserAgent } from '@/lib/services';
 import type { ContactFormResponse, ContactFormData } from '@/lib/types';
+import { checkAndUpdateRateLimit } from './token';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const contactFormSchema = z.object({
   name: z.string().min(2).max(100).trim(),
@@ -13,19 +15,33 @@ const contactFormSchema = z.object({
   message: z.string().min(10).max(5000).trim(),
 });
 
+// Email Service
+export async function sendEmail(data: ContactFormData) {
+  const { name, email, message } = data;
+
+  return resend.emails.send({
+    from: `${name} <contact@devhims.com>`,
+    to: 'contact@devhims.com',
+    replyTo: email,
+    subject: `Inquiry: ${name}`,
+    text: `${message}
+  
+  ---
+  Sent via devhims.com contact form
+  Name: ${name}
+  Email: ${email}
+  `,
+  });
+}
+
 export async function submitContactForm(
   prevState: ContactFormResponse | null,
   formData: FormData
 ): Promise<ContactFormResponse> {
   try {
-    const headersList = await headers();
-    const xForwardedFor = headersList.get('x-forwarded-for') || '';
-    const ip = xForwardedFor.split(',')[0].trim() || 'unknown';
-
     // 1. Check rate limit
-    const rateLimitResult = await checkRateLimit(headersList, ip);
+    const rateLimitResult = await checkAndUpdateRateLimit();
     if (!rateLimitResult.success) {
-      console.log('Rate limit exceeded:', rateLimitResult.message);
       return {
         success: false,
         message: rateLimitResult.message,
@@ -57,8 +73,6 @@ export async function submitContactForm(
       }),
       environment:
         process.env.NODE_ENV === 'development' ? 'Development' : 'Production',
-      ip: ip,
-      userAgent: parseUserAgent(headersList.get('user-agent') || 'unknown'),
     });
     try {
       await sendEmail(validatedData.data);
