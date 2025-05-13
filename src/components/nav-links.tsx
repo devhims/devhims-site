@@ -1,15 +1,15 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { blogUrl, routes } from '@/constants';
+import { cvUrl, routes } from '@/constants';
 import { useSearchParams } from 'next/navigation';
 
 export default function NavLinks() {
   const searchParams = useSearchParams();
 
   const handleClick = (tab: string) => {
-    if (tab === 'blog') {
-      window.open(blogUrl, '_blank', 'noopener,noreferrer');
+    if (tab === 'cv') {
+      window.open(cvUrl, '_blank', 'noopener,noreferrer');
       return;
     }
     const params = new URLSearchParams(searchParams);

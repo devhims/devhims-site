@@ -2,7 +2,7 @@ import { TimelineItemProps } from '@/components/timeline';
 import { Home, BookOpen, Briefcase, Code2, Mail } from 'lucide-react';
 import blobUrls from '@/_generated/blob-urls.json';
 
-export const blogUrl = 'https://devhims-blog.vercel.app';
+export const cvUrl = 'https://cv.devhims.com';
 
 export const profileImageSmall = blobUrls.PROFILE2;
 export const profileImageLarge = blobUrls.PROFILE;
@@ -11,7 +11,7 @@ export const noise = blobUrls.NOISE;
 
 export const routes = [
   { label: 'Home', icon: Home, tab: 'posts' },
-  { label: 'Blog', icon: BookOpen, tab: 'blog' },
+  { label: 'Resume', icon: BookOpen, tab: 'cv' },
   {
     label: 'Experience',
     icon: Briefcase,
