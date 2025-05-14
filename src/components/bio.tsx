@@ -44,7 +44,10 @@ export default function Bio({ className }: { className?: string }) {
           </h1>
           <p className='text-gray-400'>@devhims</p>
         </div>
-        <p>DX Engineer | Building modern web apps with React & Next.js</p>
+        <p>
+          Senior Full-Stack Engineer | Building scalable systems with clean
+          architecture & intuitive UX
+        </p>
         <div className='flex flex-wrap gap-x-4 text-gray-400 mt-2'>
           <span className='flex items-center gap-1'>
             <MapPin size={16} />
