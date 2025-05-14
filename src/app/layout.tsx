@@ -21,12 +21,16 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Himanshu Gupta | Devhims',
   description:
-    'Full-stack web developer and design engineer specializing in React, Next.js, and modern web technologies. Creating performant and beautiful web experiences from India.',
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL! || 'http://localhost:3000'
-  ),
+    'Senior Full-Stack Engineer building AI-powered web solutions with an emphasis on clean architecture and user experience.',
+  metadataBase: new URL('https://devhims.com'),
   openGraph: {
-    images: '/opengraph-image.png',
+    type: 'profile',
+    title: 'Himanshu Gupta | Devhims',
+    description:
+      'Senior Full-Stack Engineer building AI-powered web solutions with an emphasis on clean architecture and user experience.',
+    locale: 'en_US',
+    siteName: 'Devhims',
+    url: 'https://devhims.com',
   },
 };
 
