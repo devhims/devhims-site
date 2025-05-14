@@ -174,3 +174,41 @@ export const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
     ],
   },
 ];
+
+export const projects = [
+  {
+    title: 'YouTube Caption Extractor',
+    description:
+      'A lightweight package to scrape and parse captions (subtitles) from YouTube videos, supporting both user-submitted and auto-generated captions with language options.',
+    image: '/projects/captions.png',
+    link: 'https://github.com/devhims/youtube-caption-extractor',
+  },
+  {
+    title: 'Model Viewer React',
+    description:
+      'Tailor-made components and layouts to speed up your AR workflow on the web with React. Based on the model-viewer component.',
+    image: '/projects/model-viewer.png',
+    link: 'https://github.com/devhims/model-viewer-react',
+  },
+  {
+    title: 'Easy Object Pooling',
+    description:
+      'Provides an easy implementation of object pooling in a Unity project. Useful for any 3D/2D/AR/VR project.',
+    image: '/projects/object-pooling.png',
+    link: 'https://github.com/devhims/Easy-Object-Pooling',
+  },
+  {
+    title: 'YouTube GPT',
+    description:
+      'A tool that combines YouTube captions with GPT to generate summaries and insights from video content.',
+    image: '/projects/youtube-gpt.png',
+    link: 'https://github.com/devhims/youtube-gpt',
+  },
+  {
+    title: 'React 8thWall AFrame',
+    description:
+      '8thwall integration with AFrame for React-based web augmented reality applications.',
+    image: '/projects/8th-wall.png',
+    link: 'https://github.com/devhims/react-8thwall-aframe',
+  },
+];
