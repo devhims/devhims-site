@@ -18,6 +18,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  redirects: async () => {
+    return [
+      {
+        source: '/cv',
+        destination: 'https://cv.devhims.com',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
