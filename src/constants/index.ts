@@ -4,8 +4,8 @@ import blobUrls from '@/_generated/blob-urls.json';
 
 export const cvUrl = 'https://cv.devhims.com';
 
-export const profileImageSmall = blobUrls.PROFILE2;
-export const profileImageLarge = blobUrls.PROFILE;
+export const profileImageSmall = '/projects/profile.png';
+export const profileImageLarge = '/projects/profile.png';
 export const blueTwitterVerifiedSign = blobUrls['BLUE-TWITTER-VERIFIED-SIGN'];
 export const noise = blobUrls.NOISE;
 
@@ -89,6 +89,32 @@ Here are some glimpses from this year's event.
 ];
 
 export const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
+  {
+    date: '2025 - Present',
+    title: 'Platform Engineer',
+    company: 'WebLinq',
+    logo: '/projects/weblinq_logo.png',
+    description: `
+  • Created WebLinq, a Cloudflare workers based web scraping and browser automation platform for real-time data access by developers and AI systems.
+  
+  • Implemented intelligent browser session reuse via Durable Objects for efficient session reuse and performance optimization.
+  
+  • Built a secure API key system with endpoints for search, screenshots, HTML/Markdown/PDF extraction, and MCP integration.
+  
+  • Developed a Next.js dashboard and docs site for visual API interaction and quick onboarding.
+  
+  • Oversaw the full product lifecycle from architecture to launch on Product Hunt.`,
+    skills: [
+      'Cloudflare Workers',
+      'Durable Objects',
+      'Browser Automation',
+      'Web Scraping',
+      'AI Integration',
+      'MCP',
+      'Next.js',
+      'TypeScript',
+    ],
+  },
   {
     date: '2021 - 2024',
     title: 'Senior Software Engineer',
@@ -177,6 +203,13 @@ export const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
 
 export const projects = [
   {
+    title: 'WebLinq',
+    description:
+      'High-performance web scraping and automation platform built on Cloudflare Workers, featuring session reuse and a full API for search, screenshots, markdown extraction, YouTube captions, and AI-powered data extraction.',
+    image: '/projects/weblinq.png',
+    link: 'https://github.com/devhims/weblinq',
+  },
+  {
     title: 'YouTube Caption Extractor',
     description:
       'A lightweight package to scrape and parse captions (subtitles) from YouTube videos, supporting both user-submitted and auto-generated captions with language options.',
@@ -196,13 +229,6 @@ export const projects = [
       'Provides an easy implementation of object pooling in a Unity project. Useful for any 3D/2D/AR/VR project.',
     image: '/projects/object-pooling.png',
     link: 'https://github.com/devhims/Easy-Object-Pooling',
-  },
-  {
-    title: 'YouTube GPT',
-    description:
-      'A tool that combines YouTube captions with GPT to generate summaries and insights from video content.',
-    image: '/projects/youtube-gpt.png',
-    link: 'https://github.com/devhims/youtube-gpt',
   },
   {
     title: 'React 8thWall AFrame',

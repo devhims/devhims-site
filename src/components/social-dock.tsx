@@ -19,7 +19,12 @@ const socialLinks = [
     icon: LinkedinLogo,
     size: 18,
   },
-  { href: 'https://github.com', label: 'GitHub', icon: GithubIcon, size: 20 },
+  {
+    href: 'https://github.com/devhims',
+    label: 'GitHub',
+    icon: GithubIcon,
+    size: 20,
+  },
   {
     href: 'https://instagram.com/oh.thathimanshu',
     label: 'Instagram',
