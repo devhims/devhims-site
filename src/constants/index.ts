@@ -1,13 +1,10 @@
 import { TimelineItemProps } from '@/components/timeline';
 import { Home, BookOpen, Briefcase, Code2, Mail } from 'lucide-react';
-import blobUrls from '@/_generated/blob-urls.json';
 
 export const cvUrl = 'https://cv.devhims.com';
 
-export const profileImageSmall = '/projects/profile.png';
-export const profileImageLarge = '/projects/profile.png';
-export const blueTwitterVerifiedSign = blobUrls['BLUE-TWITTER-VERIFIED-SIGN'];
-export const noise = blobUrls.NOISE;
+export const blueTwitterVerifiedSign = '/blue-twitter-verified-sign.svg';
+export const noise = '/noise.png';
 
 export const routes = [
   { label: 'Home', icon: Home, tab: 'posts' },
@@ -30,20 +27,20 @@ export const tabItems = [
 
 export const posts = [
   {
-    profileImage: blobUrls.PROFILE2,
+    profileImage: '/profile.png',
     name: 'Himanshu Gupta',
     handle: 'devhims',
     isVerified: true,
     date: 'Dec 20, 2024',
     content:
-      'Building my personal website with Next.js 15, Tailwind CSS, and TypeScript! 🚀 Loving the developer experience so far.',
+      'Building my personal website with Next.js 16, Tailwind CSS 4, and TypeScript! 🚀 Loving the developer experience so far.',
     likes: 42,
     retweets: 12,
     replies: 5,
     views: 1.2,
   },
   {
-    profileImage: blobUrls.PROFILE2,
+    profileImage: '/profile.png',
     name: 'Himanshu Gupta',
     handle: 'devhims',
     isVerified: true,
@@ -54,10 +51,10 @@ export const posts = [
 𝐃𝐚𝐲 𝟐: Hands-on session on the implementation of light estimation API (ARCore).
 𝐓𝐨𝐭𝐚𝐥 𝐬𝐥𝐞𝐞𝐩 𝐭𝐢𝐦𝐞: 10 hours combined. 🙈`,
     mediaUrls: [
-      blobUrls['POST-IMAGES'].GDG['4'],
-      blobUrls['POST-IMAGES'].GDG['2'],
-      blobUrls['POST-IMAGES'].GDG['3'],
-      blobUrls['POST-IMAGES'].GDG['1'],
+      '/posts/gdg/4.webp',
+      '/posts/gdg/2.webp',
+      '/posts/gdg/3.webp',
+      '/posts/gdg/1.webp',
     ],
     likes: 89,
     retweets: 24,
@@ -65,7 +62,7 @@ export const posts = [
     views: 2.5,
   },
   {
-    profileImage: blobUrls.PROFILE2,
+    profileImage: '/profile.png',
     name: 'Himanshu Gupta',
     handle: 'devhims',
     isVerified: true,
@@ -76,10 +73,10 @@ Here are some glimpses from this year's event.
 
 #augmentedreality #wework #meetup`,
     mediaUrls: [
-      blobUrls['POST-IMAGES'].UNITY['1'],
-      blobUrls['POST-IMAGES'].UNITY['2'],
-      blobUrls['POST-IMAGES'].UNITY['3'],
-      blobUrls['POST-IMAGES'].UNITY['4'],
+      '/posts/unity/1.webp',
+      '/posts/unity/2.webp',
+      '/posts/unity/3.webp',
+      '/posts/unity/4.webp',
     ],
     likes: 89,
     retweets: 24,
@@ -93,7 +90,7 @@ export const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
     date: '2025 - Present',
     title: 'Platform Engineer',
     company: 'WebLinq',
-    logo: '/projects/weblinq_logo.png',
+    logo: '/experience/weblinq_logo.png',
     description: `
   • Created WebLinq, a Cloudflare workers based web scraping and browser automation platform for real-time data access by developers and AI systems.
   
@@ -119,7 +116,7 @@ export const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
     date: '2021 - 2024',
     title: 'Senior Software Engineer',
     company: 'Immersive Realities',
-    logo: blobUrls['WORK-ICONS'].IR,
+    logo: '/experience/ir.webp',
     description: `
   • Designed and implemented a RAG based Chat with Documents AI web application, enabling secure and efficient document storage, retrieval, and Q&A functionality.
   
@@ -145,7 +142,7 @@ export const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
     date: '2020 - 2021',
     title: 'Founder and Lead Developer',
     company: 'Cosmoreal',
-    logo: blobUrls['WORK-ICONS'].COSMOREAL,
+    logo: '/experience/cosmoreal.webp',
     description: `
   • Developed an AR-based mobile app that understands space, offering a true-to-life experience for furniture visualization and interior design.
   
@@ -164,7 +161,7 @@ export const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
     date: '2019 - 2021',
     title: 'Co-organizer Unity Bangalore Community',
     company: 'Unity',
-    logo: blobUrls['WORK-ICONS'].UNITY,
+    logo: '/experience/unity.webp',
     description: `
   • Provided a platform for indie Unity developers and artists to up-skill and get help from others in the field.
   
@@ -182,7 +179,7 @@ export const experienceData: Array<Omit<TimelineItemProps, 'isLast'>> = [
     date: '2016 - 2019',
     title: 'Mentor and Project Reviewer',
     company: 'Udacity',
-    logo: blobUrls['WORK-ICONS'].UDACITY,
+    logo: '/experience/udacity.webp',
     description: `
   • Reviewed student projects for the Virtual Reality, Digital Marketing, and Android Basics programs.
   

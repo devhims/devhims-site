@@ -7,7 +7,6 @@ import {
 } from '@/components/ui/dialog';
 import Image from 'next/image';
 import { X } from 'lucide-react';
-import { profileImageLarge, profileImageSmall } from '@/constants';
 
 export const ProfileImage = () => {
   return (
@@ -21,7 +20,7 @@ export const ProfileImage = () => {
             aria-haspopup='dialog'
           >
             <Image
-              src={profileImageSmall}
+              src='/profile.png'
               alt='Profile'
               className='rounded-full border-4 border-black object-cover aspect-square object-[50%_25%] cursor-pointer hover:opacity-90 transition-opacity'
               width={150}
@@ -39,7 +38,7 @@ export const ProfileImage = () => {
           <DialogTitle className='sr-only'>Profile Picture</DialogTitle>
 
           <Image
-            src={profileImageLarge}
+            src='/profile.png'
             alt='Profile'
             className='rounded-full object-cover aspect-square object-[55%_25%]'
             width={400}

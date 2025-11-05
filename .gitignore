@@ -43,3 +43,6 @@ next-env.d.ts
 # db
 local.db
 
+# IDE
+.vscode/
+

@@ -67,7 +67,7 @@ export default async function Image() {
           }}
         >
           <img
-            src='https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled%20%282%29-cewUemtY59wkXQB4V4F6hsGSoc7uI0.png'
+            src='https://devhims.com/profile.png'
             alt='Profile'
             width={220}
             height={220}
