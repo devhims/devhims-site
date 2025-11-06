@@ -7,7 +7,7 @@
  */
 
 import { z } from 'zod';
-import { saveMessage } from '@/_data/messages';
+import { saveMessage } from '@/db/queries';
 import { after } from 'next/server';
 import type { ContactFormResponse, ContactFormData } from '@/lib/types';
 import { checkAndUpdateRateLimit } from './rate-limit';

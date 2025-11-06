@@ -1,18 +1,21 @@
 import 'server-only';
+
 import { db } from '@/db';
 import { messages } from '@/db/schema';
+
+interface SaveMessageInput {
+  name: string;
+  email: string;
+  message: string;
+  systemInfo: string;
+}
 
 export async function saveMessage({
   name,
   email,
   message,
   systemInfo,
-}: {
-  name: string;
-  email: string;
-  message: string;
-  systemInfo: string;
-}) {
+}: SaveMessageInput) {
   const [result] = await db
     .insert(messages)
     .values({

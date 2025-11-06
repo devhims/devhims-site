@@ -8,8 +8,6 @@
 
 A modern personal site built with Next.js 16 showcasing my work as a Senior Full-Stack Engineer in AI, AR, and scalable web systems. It reimagines the Twitter timeline with shader-enhanced visuals while maintaining perfect 100/100 Lighthouse scores on desktop and mobile.
 
----
-
 ## ✨ Highlights
 
 - **Twitter-Inspired Layout** – Adapts the familiar Twitter interface into a cohesive portfolio with a timeline, dock, and tabbed sections for posts, projects, experience, and contact.
@@ -18,8 +16,6 @@ A modern personal site built with Next.js 16 showcasing my work as a Senior Full
 - **Considered Motion** – Uses Framer Motion and React Spring for micro-interactions (timeline rail, dock, dialogs), fully respecting `prefers-reduced-motion`.
 - **Contact Workflow** – Implements server actions with Zod validation, Turso persistence via Drizzle ORM, Resend email integration, and a signed-JWT rate limiter.
 - **Lighthouse 100/100** – Achieves perfect scores in Performance, Accessibility, Best Practices, and SEO on both desktop and mobile builds.
-
----
 
 ## 🧭 Table of Contents
 
@@ -30,8 +26,6 @@ A modern personal site built with Next.js 16 showcasing my work as a Senior Full
 5. [Performance Notes](#-performance-notes)
 6. [Contributing](#-contributing)
 7. [License & Contact](#-license--contact)
-
----
 
 ## 🛠 Tech Stack
 
@@ -50,8 +44,6 @@ A modern personal site built with Next.js 16 showcasing my work as a Senior Full
 - Resend for contact form email delivery
 - Vercel for hosting, Analytics, and Speed Insights
 
----
-
 ## 🚀 Getting Started
 
 ```bash
@@ -65,8 +57,6 @@ pnpm dev
 
 Visit http://localhost:3000 and explore the tabs or share a deep link such as `http://localhost:3000/?tab=experience`.
 
----
-
 ## 🔐 Environment Variables
 
 Create a `.env.local` file with the following keys:
@@ -79,8 +69,6 @@ NEXT_PUBLIC_VERCEL_ANALYTICS=true
 ```
 
 Run `pnpm db:generate && pnpm db:migrate:dev` after updating the database URL to keep the schema in sync.
-
----
 
 ## 🗂 Project Structure
 
@@ -106,15 +94,11 @@ Other notable files:
 - `postcss.config.mjs` – Tailwind v4 plugin entry
 - `drizzle.config.ts` – Database migrations
 
----
-
 ## ⚡ Performance Notes
 
 - Image assets are optimized through Next/Image and a minimal font payload (Geist Sans + Mono via next/font).
 - Animations respect `prefers-reduced-motion`, and GPU-heavy work (aurora) is isolated to a dedicated canvas.
 - Lighthouse reports 100 in Performance, Accessibility, Best Practices, and SEO for both desktop and mobile profiles (tested on production builds hosted on Vercel).
-
----
 
 ## 🤝 Contributing
 
@@ -123,8 +107,6 @@ Open to fixes and enhancements:
 1. Fork the repo and create a branch (`git checkout -b feature/your-idea`)
 2. Run tests and linting (`pnpm lint`)
 3. Open a PR describing the change and screenshots if it touches UI
-
----
 
 ## 📄 License & Contact
 
