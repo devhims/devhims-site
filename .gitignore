@@ -46,3 +46,6 @@ local.db
 # IDE
 .vscode/
 
+# Tailwind CSS v4 migration
+TAILWIND_V4_MIGRATION.md
+

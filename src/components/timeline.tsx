@@ -2,7 +2,6 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
 function BulletPoints({ text }: { text: string }) {
-  // Split the text into individual bullet points
   const points = text
     .trim()
     .split('\n')
@@ -45,33 +44,28 @@ function TimelineItem({
   isActiveTab,
 }: TimelineItemProps) {
   return (
-    <div className='relative flex gap-6 pb-8 group'>
-      {/* Timeline line */}
+    <div
+      className='relative flex gap-6 pb-8 group cursor-pointer'
+      tabIndex={0}
+    >
       <div
         className="
           absolute left-[24px] top-[50px] h-[calc(100%-40px)] w-[2px]
           bg-gray-700/50 overflow-hidden
           before:content-[''] before:absolute before:left-0 before:top-0
           before:w-[30px] before:h-[20px] before:border-b-2 before:border-gray-700/50
-          before:group-hover:border-blue-400 before:rounded-bl-xl
+          before:rounded-bl-xl group-hover:before:border-blue-400 group-focus:before:border-blue-400 group-focus-visible:before:border-blue-400 group-focus-within:before:border-blue-400 group-active:before:border-blue-400
           after:content-[''] after:absolute after:inset-0
           after:bg-gradient-to-b after:from-blue-400 after:to-blue-400
-          after:-translate-y-full after:group-hover:translate-y-0
+          after:-translate-y-full group-hover:after:translate-y-0 group-focus:after:translate-y-0 group-focus-visible:after:translate-y-0 group-focus-within:after:translate-y-0 group-active:after:translate-y-0
           after:transition-transform after:duration-300 after:ease-in-out
           z-0
         "
         style={{ bottom: isLast ? '50%' : '0' }}
       />
 
-      {/* Timeline dot with logo */}
       <div className='relative z-10'>
-        <div
-          className='
-       w-12 h-12 rounded-full border-2 border-gray-700/50 bg-gray-900
-    group-hover:border-blue-500/50 group-hover:bg-blue-500/10
-    transition-colors overflow-hidden
-          '
-        >
+        <div className='w-12 h-12 rounded-full border-2 border-gray-700/50 bg-gray-900 transition-colors overflow-hidden group-hover:border-blue-400 group-hover:bg-blue-500/10 group-focus:border-blue-400 group-focus:bg-blue-500/10 group-focus-within:border-blue-400 group-focus-within:bg-blue-500/10 group-focus-visible:border-blue-400 group-focus-visible:bg-blue-500/10 group-active:border-blue-400 group-active:bg-blue-500/10'>
           {logo ? (
             <Image
               src={logo}
@@ -86,18 +80,17 @@ function TimelineItem({
               priority={isActiveTab}
             />
           ) : (
-            <div className='w-full h-full flex items-center justify-center text-gray-500 font-medium'>
+            <div className='flex h-full w-full items-center justify-center text-gray-500 font-medium'>
               {company.charAt(0)}
             </div>
           )}
         </div>
       </div>
 
-      {/* Content */}
       <div className='flex-1 space-y-2'>
         <div className='space-y-1/2'>
           <div className='text-sm text-gray-500 font-mono'>{date}</div>
-          <div className='flex flex-col  sm:flex-row sm:items-baseline gap-1 sm:gap-2'>
+          <div className='flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2'>
             <h3 className='font-semibold text-lg text-white'>{title}</h3>
             <span className='hidden sm:inline text-gray-500'>•</span>
             <span className='text-gray-400 font-bold'>{company}</span>

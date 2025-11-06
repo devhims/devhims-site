@@ -21,7 +21,7 @@ export default function Bio({ className }: { className?: string }) {
             <Button
               asChild
               variant='outline'
-              className='rounded-full text-black font-bold text-md px-4 py-2'
+              className='rounded-full bg-white text-black font-bold text-md px-4 py-2 hover:bg-white/80 hover:text-black'
             >
               <Link href='https://x.com/devhims' target='_blank'>
                 Follow

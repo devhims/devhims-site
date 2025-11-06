@@ -1,10 +1,9 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  cacheComponents: true,
   experimental: {
-    ppr: true,
     inlineCss: true,
-    reactCompiler: true,
   },
   images: {
     minimumCacheTTL: 31536000,
