@@ -1,223 +1,134 @@
-# Himanshu Gupta | Personal Portfolio
+# Himanshu Gupta · Personal Site
 
 ![Portfolio Preview](https://img.shields.io/badge/Portfolio-Online-brightgreen?style=for-the-badge&logo=vercel)
 [![Next.js](https://img.shields.io/badge/Next.js-16.0.1-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue?style=flat&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4.1.16-38B2AC?style=flat&logo=tailwind-css)
+![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-3178C6?style=flat&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.16-38B2AC?style=flat&logo=tailwind-css)
 
-A modern, responsive personal portfolio website built with Next.js 16, showcasing my journey as a Senior Full-Stack Engineer specializing in AI-powered web solutions, augmented reality, and scalable system architecture.
-
-## 🌟 Features
-
-### 📱 Interactive Portfolio Sections
-
-- **Posts**: Personal updates and development insights in a Twitter-like interface
-- **Projects**: Showcase of open-source contributions and personal projects
-- **Experience**: Professional journey with detailed role descriptions and skills
-- **Contact**: Functional contact form with email integration and database storage
-
-### 🎨 Modern UI/UX
-
-- Twitter-inspired design with dark theme
-- Responsive layout optimized for all devices
-- Smooth animations with Framer Motion and React Spring
-- Aurora effect banner with Three.js
-- Swipeable tabs for mobile navigation
-
-### 🚀 Performance & Analytics
-
-- Built with Next.js 15 and React 19
-- Vercel Analytics and Speed Insights integration
-- Optimized fonts with Geist Sans and Geist Mono
-- Rate limiting for contact form submissions
-
-### 📧 Contact System
-
-- Server-side form validation with Zod
-- Email notifications via Resend
-- Database storage with Drizzle ORM and Turso
-- Rate limiting with Upstash Redis
-
-## 🛠 Tech Stack
-
-### Frontend
-
-- **Next.js 16.0.1** - React framework with App Router
-- **React 19.2.0** - Latest React with concurrent features
-- **TypeScript 5.9.3** - Type-safe JavaScript
-- **Tailwind CSS 4.1.16** - Utility-first CSS framework (v4 with CSS-based config)
-- **Framer Motion 12.23.24** - Animation library
-- **Three.js 0.181.0** - 3D graphics and aurora effects
-
-### Backend & Infrastructure
-
-- **Drizzle ORM** - Type-safe SQL query builder
-- **Turso** - Edge database (SQLite-compatible)
-- **Resend** - Email service for contact forms
-- **Upstash Redis** - Rate limiting and caching
-- **Vercel** - Deployment and hosting
-
-### UI Components
-
-- **Radix UI** - Accessible component primitives
-- **Lucide React** - Beautiful icon library
-- **Sonner** - Toast notifications
-- **Embla Carousel** - Touch-friendly carousels
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- pnpm (recommended), or npm/yarn/bun
-
-### Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/devhims/devhims-site.git
-   cd devhims-site
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   pnpm install
-   # or
-   npm install
-   # or
-   yarn install
-   ```
-
-3. **Set up environment variables**
-
-   Create a `.env.local` file in the root directory:
-
-   ```env
-   # Database
-   DATABASE_URL=your_turso_database_url
-
-   # Email Service
-   RESEND_API_KEY=your_resend_api_key
-
-   # Rate Limiting
-   UPSTASH_REDIS_REST_URL=your_upstash_redis_url
-   UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_token
-
-   # Analytics (optional)
-   NEXT_PUBLIC_VERCEL_ANALYTICS=true
-   ```
-
-4. **Set up the database**
-
-   ```bash
-   # Generate and run migrations
-   pnpm db:generate
-   pnpm db:migrate:dev
-   ```
-
-5. **Run the development server**
-
-   ```bash
-   pnpm dev
-   # or
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-6. **Open [http://localhost:3000](http://localhost:3000)** in your browser
-
-## 📁 Project Structure
-
-```
-devhims-site/
-├── src/
-│   ├── app/                 # Next.js App Router
-│   │   ├── actions/         # Server actions
-│   │   ├── favicon.ico
-│   │   ├── globals.css
-│   │   ├── layout.tsx       # Root layout
-│   │   ├── page.tsx         # Home page
-│   │   └── robots.ts        # SEO
-│   ├── components/          # React components
-│   │   ├── ui/              # Reusable UI components
-│   │   ├── skeletons/       # Loading skeletons
-│   │   └── icons/           # Custom icons
-│   ├── constants/           # App constants & data
-│   ├── db/                  # Database schema & config
-│   ├── hooks/               # Custom React hooks
-│   └── lib/                 # Utilities & types
-├── public/                  # Static assets
-├── drizzle.config.ts        # Database configuration
-├── next.config.ts          # Next.js configuration
-└── tailwind.config.ts      # Tailwind CSS config
-```
-
-## 🗄 Database Schema
-
-The application uses a simple SQLite database with Turso for contact messages:
-
-```sql
-CREATE TABLE messages (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL DEFAULT 'Anonymous',
-  email TEXT NOT NULL,
-  message TEXT NOT NULL,
-  system_info TEXT NOT NULL,
-  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-1. **Connect your repository** to Vercel
-2. **Set environment variables** in Vercel dashboard
-3. **Deploy automatically** on every push to main branch
-
-### Manual Deployment
-
-```bash
-# Build for production
-pnpm build
-
-# Start production server
-pnpm start
-```
-
-## 🤝 Contributing
-
-While this is a personal portfolio, contributions for bug fixes and improvements are welcome:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🙏 Acknowledgments
-
-- **Vercel** for hosting and analytics
-- **Turso** for the edge database (SQLite-compatible)
-- **Resend** for email services
-- **Upstash** for Redis based rate limiting
-- **Drizzle ORM** for database operations
-
-## 📞 Contact
-
-- **Website**: [https://devhims.com](https://devhims.com)
-- **GitHub**: [devhims](https://github.com/devhims)
-- **LinkedIn**: [creativehims](https://linkedin.com/in/creativehims)
-- **Twitter**: [@devhims](https://x.com/devhims)
-- **Email**: contact@devhims.com
+A modern personal site built with Next.js 16 showcasing my work as a Senior Full-Stack Engineer in AI, AR, and scalable web systems. It reimagines the Twitter timeline with shader-enhanced visuals while maintaining perfect 100/100 Lighthouse scores on desktop and mobile.
 
 ---
 
-**Built with ❤️ by Himanshu Gupta**
+## ✨ Highlights
+
+- **Twitter-Inspired Layout** – Adapts the familiar Twitter interface into a cohesive portfolio with a timeline, dock, and tabbed sections for posts, projects, experience, and contact.
+- **Aurora Shader Banner** – Features a custom Three.js shader that renders a realtime aurora backdrop, dynamically scaling across all breakpoints.
+- **URL Synced Tabs** – Maintains tab state through query parameters and supports swipe gestures, enabling deep links such as `?tab=experience`.
+- **Considered Motion** – Uses Framer Motion and React Spring for micro-interactions (timeline rail, dock, dialogs), fully respecting `prefers-reduced-motion`.
+- **Contact Workflow** – Implements server actions with Zod validation, Turso persistence via Drizzle ORM, Resend email integration, and a signed-JWT rate limiter.
+- **Lighthouse 100/100** – Achieves perfect scores in Performance, Accessibility, Best Practices, and SEO on both desktop and mobile builds.
+
+---
+
+## 🧭 Table of Contents
+
+1. [Tech Stack](#-tech-stack)
+2. [Getting Started](#-getting-started)
+3. [Environment](#-environment-variables)
+4. [Project Structure](#-project-structure)
+5. [Performance Notes](#-performance-notes)
+6. [Contributing](#-contributing)
+7. [License & Contact](#-license--contact)
+
+---
+
+## 🛠 Tech Stack
+
+**Frontend**
+
+- Next.js 16 App Router, React 19, TypeScript 5.9
+- Tailwind CSS 4 with CSS-driven theming
+- Framer Motion, React Spring, Embla Carousel
+- Three.js for custom shader effects
+- Radix UI / shadcn primitives, Lucide icons, Sonner toasts
+
+**Backend & Infrastructure**
+
+- Drizzle ORM + Turso (SQLite) for persistence
+- Next.js server actions with Zod validation & signed-JWT rate limiting
+- Resend for contact form email delivery
+- Vercel for hosting, Analytics, and Speed Insights
+
+---
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/devhims/devhims-site.git
+cd devhims-site
+pnpm install          # or npm/yarn/bun
+pnpm db:generate
+pnpm db:migrate:dev
+pnpm dev
+```
+
+Visit http://localhost:3000 and explore the tabs or share a deep link such as `http://localhost:3000/?tab=experience`.
+
+---
+
+## 🔐 Environment Variables
+
+Create a `.env.local` file with the following keys:
+
+```env
+DATABASE_URL= # Turso connection string
+RESEND_API_KEY=
+RATE_LIMIT_SECRET= # 32+ char secret for signed rate-limit token
+NEXT_PUBLIC_VERCEL_ANALYTICS=true
+```
+
+Run `pnpm db:generate && pnpm db:migrate:dev` after updating the database URL to keep the schema in sync.
+
+---
+
+## 🗂 Project Structure
+
+```
+src/
+├── app/                 # App Router entrypoints, server actions, RSC
+│   ├── globals.css      # Tailwind v4 theme + global styles
+│   ├── layout.tsx       # Root layout with font wiring
+│   └── page.tsx         # Landing experience
+├── components/
+│   ├── aurora-effect.tsx    # Three.js shader canvas
+│   ├── dock.tsx, nav-links.tsx, timeline.tsx, ...
+│   ├── ui/                 # shadcn/Radix based primitives
+│   └── skeletons/          # Loading states
+├── constants/              # Static data, noise textures, routes
+├── db/                     # Drizzle schema & migrations
+├── hooks/                  # Client hooks (swipeable tabs, etc.)
+└── lib/                    # Utilities and helpers
+```
+
+Other notable files:
+
+- `postcss.config.mjs` – Tailwind v4 plugin entry
+- `drizzle.config.ts` – Database migrations
+
+---
+
+## ⚡ Performance Notes
+
+- Image assets are optimized through Next/Image and a minimal font payload (Geist Sans + Mono via next/font).
+- Animations respect `prefers-reduced-motion`, and GPU-heavy work (aurora) is isolated to a dedicated canvas.
+- Lighthouse reports 100 in Performance, Accessibility, Best Practices, and SEO for both desktop and mobile profiles (tested on production builds hosted on Vercel).
+
+---
+
+## 🤝 Contributing
+
+Open to fixes and enhancements:
+
+1. Fork the repo and create a branch (`git checkout -b feature/your-idea`)
+2. Run tests and linting (`pnpm lint`)
+3. Open a PR describing the change and screenshots if it touches UI
+
+---
+
+## 📄 License & Contact
+
+- Licensed under the [MIT License](LICENSE).
+- Say hello: [devhims.com](https://devhims.com) · [@devhims](https://x.com/devhims) · contact@devhims.com
+
+Built with ❤️ by Himanshu Gupta.
