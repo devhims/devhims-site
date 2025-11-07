@@ -214,11 +214,18 @@ export const projects = [
     link: 'https://github.com/devhims/youtube-caption-extractor',
   },
   {
-    title: 'Model Viewer React',
+    title: 'Mermaid Agent',
     description:
-      'Tailor-made components and layouts to speed up your AR workflow on the web with React. Based on the model-viewer component.',
-    image: '/projects/model-viewer.png',
-    link: 'https://github.com/devhims/model-viewer-react',
+      'A modern Mermaid diagram editor with agentic error fixing and export capabilities. Built for developers and designers who want real-time AI-assisted diagram creation, validation, and professional-grade exports.',
+    image: '/projects/mermaid-agent.png',
+    link: 'https://github.com/devhims/mermaid-agent',
+  },
+  {
+    title: 'OpenGPT',
+    description:
+      'Experiment with 50+ open-source AI models, including GPT-OSS, Leonardo, Llama, Qwen, Gemini, DeepSeek, and more. Features text-to-speech with multiple voices and real-time speech-to-text transcription',
+    image: '/projects/opengpt.png',
+    link: 'https://github.com/devhims/opengpt',
   },
   {
     title: 'Easy Object Pooling',
@@ -226,12 +233,5 @@ export const projects = [
       'Provides an easy implementation of object pooling in a Unity project. Useful for any 3D/2D/AR/VR project.',
     image: '/projects/object-pooling.png',
     link: 'https://github.com/devhims/Easy-Object-Pooling',
-  },
-  {
-    title: 'React 8thWall AFrame',
-    description:
-      '8thwall integration with AFrame for React-based web augmented reality applications.',
-    image: '/projects/8th-wall.png',
-    link: 'https://github.com/devhims/react-8thwall-aframe',
   },
 ];
