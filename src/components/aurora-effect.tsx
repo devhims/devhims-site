@@ -128,24 +128,83 @@ export default function AuroraEffect({ className }: { className?: string }) {
     const container = containerRef.current;
     if (!container) return;
 
-    // Initialize scene
-    const scene = new THREE.Scene();
-    sceneRef.current = scene;
+    // Comprehensive WebGL support check
+    let gl: WebGLRenderingContext | null = null;
+    try {
+      const testCanvas = document.createElement('canvas');
+      gl = testCanvas.getContext('webgl', {
+        failIfMajorPerformanceCaveat: false,
+      }) as WebGLRenderingContext | null;
 
-    // Initialize camera
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
-    camera.position.z = 1;
-    cameraRef.current = camera;
+      if (!gl) {
+        gl = testCanvas.getContext('experimental-webgl', {
+          failIfMajorPerformanceCaveat: false,
+        }) as WebGLRenderingContext | null;
+      }
 
-    // Initialize renderer
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance',
-    });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
-    rendererRef.current = renderer;
+      if (!gl) {
+        console.warn('WebGL not supported - Aurora effect disabled');
+        return;
+      }
+
+      // Try to get renderer info to validate the context is actually usable
+      const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+      if (debugInfo) {
+        const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        console.log('WebGL Renderer detected:', renderer);
+      }
+
+      // Clean up test context
+      const loseContext = gl.getExtension('WEBGL_lose_context');
+      if (loseContext) {
+        loseContext.loseContext();
+      }
+    } catch (e) {
+      console.warn('WebGL check failed - Aurora effect disabled', e);
+      return;
+    }
+
+    let renderer: THREE.WebGLRenderer | null = null;
+    let scene: THREE.Scene | null = null;
+    let camera: THREE.OrthographicCamera | null = null;
+
+    try {
+      // Initialize scene
+      scene = new THREE.Scene();
+      sceneRef.current = scene;
+
+      // Initialize camera
+      camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+      camera.position.z = 1;
+      cameraRef.current = camera;
+
+      // Initialize renderer with fallback options
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance',
+        failIfMajorPerformanceCaveat: false,
+      });
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+      rendererRef.current = renderer;
+    } catch (e) {
+      console.error(
+        'Failed to initialize Three.js renderer - Aurora effect disabled:',
+        e
+      );
+
+      // Clean up any partially created resources
+      if (renderer) {
+        try {
+          renderer.dispose();
+        } catch (disposeError) {
+          console.error('Error during renderer cleanup:', disposeError);
+        }
+      }
+      return;
+    }
 
     // Create noise textures
     const noiseLoader = new THREE.TextureLoader();

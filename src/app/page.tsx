@@ -1,5 +1,5 @@
 import { RightSidebar } from '@/components/right-sidebar';
-import AuroraEffect from '@/components/aurora-effect';
+import AuroraEffectWrapper from '@/components/aurora-effect-wrapper';
 import MainNav from '@/components/main-nav';
 import ProfileTabs from '@/components/profile-tabs';
 import Bio from '@/components/bio';
@@ -12,7 +12,7 @@ export default function ProfilePage() {
         <main className='w-full max-w-2xl border-x border-gray-500/50'>
           {/* Banner */}
           <div className='relative h-48 w-full overflow-hidden'>
-            <AuroraEffect className='absolute inset-0' />
+            <AuroraEffectWrapper className='absolute inset-0' />
           </div>
           {/* Profile Info */}
           <Bio className='px-4 py-3 relative' />
